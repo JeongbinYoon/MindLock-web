@@ -1,17 +1,56 @@
 .hero {
-  padding: 6rem 0;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
   overflow: hidden;
+  color: white; /* Default text color white for dark theme */
+}
+
+.backgroundWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.backgroundImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Dark gradient overlay for readability */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(0, 0, 0, 0.9) 0%, 
+    rgba(0, 0, 0, 0.7) 40%, 
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  z-index: 1;
 }
 
 .inner {
+  position: relative;
+  z-index: 10;
   display: grid;
   gap: 4rem;
   align-items: center;
+  padding: 2rem;
 }
 
 @media (min-width: 1024px) {
   .inner {
     grid-template-columns: 1fr 1fr;
+    min-height: 80vh; 
   }
 }
 
@@ -19,44 +58,86 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  max-width: 600px;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.logoIcon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* Make logo white for dark bg if it's black */
+}
+
+.logoText {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: white;
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.025em;
-  background: linear-gradient(to right, #171717, #4f46e5);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  color: white;
 }
 
 @media (min-width: 768px) {
   .title {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
   }
 }
 
+.highlight {
+  color: #818cf8; /* Light Indigo for dark background */
+  display: block;
+}
+
 .description {
-  font-size: 1.125rem;
-  color: #4b5563;
+  font-size: 1.25rem;
+  color: #d1d5db; /* gray-300 */
   line-height: 1.6;
-  max-width: 40rem;
 }
 
 .actions {
   display: flex;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
 }
 
-.imageWrapper {
+.imageArea {
   position: relative;
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  background: #f3f4f6;
-  aspect-ratio: 16/10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: float 6s ease-in-out infinite;
+}
+
+.logoLg {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  /* Add a glow effect for the dark theme */
+  filter: drop-shadow(0 0 30px rgba(79, 70, 229, 0.4)); 
+  transition: transform 0.3s ease;
+}
+
+.logoLg:hover {
+  transform: scale(1.05);
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
 }
