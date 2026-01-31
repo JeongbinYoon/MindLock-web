@@ -106,10 +106,12 @@
   font-weight: 700;
   margin-bottom: 1rem;
   color: var(--foreground);
+  word-break: keep-all;
 }
 
 .cardDesc {
   color: var(--muted-text);
   line-height: 1.7;
   font-size: 1.05rem;
+  word-break: keep-all;
 }

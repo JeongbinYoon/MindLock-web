@@ -22,12 +22,18 @@ export default function Hero() {
             {/* Logo removed for cleaner design */}
 
             <h1 className={styles.title}>
-              {t.hero.titlePrefix}<br />{t.hero.titleSuffix}
+              <span className={styles.titlePrefix}>{t.hero.titlePrefix}</span>
+              <br />
+              <span className={styles.titleMain}>{t.hero.titleSuffix}</span>
               <span className={styles.highlight}>{t.hero.brand}</span>
             </h1>
             
             <p className={styles.description}>
-              {t.hero.description}
+              {t.hero.description.split('\n').map((line, i) => (
+                <span key={i} style={{ display: 'block', marginBottom: '0.5rem' }}>
+                  {line}
+                </span>
+              ))}
             </p>
             
             <div className={styles.actions}>

@@ -94,23 +94,41 @@
 }
 
 .title {
-  font-size: 3.5rem;
+  line-height: 1.1;
+  color: var(--foreground);
+}
+
+.titlePrefix {
+  font-size: 2.5rem; /* ~40px */
   font-weight: 800;
-  line-height: 1.15;
+  color: var(--foreground);
+  letter-spacing: -0.03em;
+  display: inline-block;
+  margin-right: 0.5rem; /* add spacing if they collapse, though they have <br> between them in HTML? Ah, HTML has <br>, so margin-right doesn't matter much unless on same line. */
+}
+
+.titleMain {
+  font-size: 2.5rem; /* ~40px */
+  font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--foreground);
 }
 
-@media (min-width: 768px) {
-  .title {
-    font-size: 5rem;
-  }
+.highlight {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--primary);
+  display: block; /* Make brand take its own line emphasis if needed, or inline? User code had it block */
+  margin-top: 0.25rem;
 }
 
-.highlight {
-  color: var(--primary);
-  display: block;
+@media (min-width: 768px) {
+  .titlePrefix { font-size: 3rem; }
+  .titleMain { font-size: 3rem; }
+  .highlight { font-size: 5.5rem; }
 }
+
+/* .highlight moved */
 
 .description {
   font-size: 1.25rem;

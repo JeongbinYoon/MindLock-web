@@ -29,7 +29,7 @@ export const en = {
       },
       {
         title: "Intuitive Dashboard & Analytics",
-        desc: "Analyze your immersive time and distraction patterns. Visualize your growth footprint with GitHub-style contribution graphs."
+        desc: "Analyze your immersive time and distraction patterns. Visualize your growth footprint with contribution graphs."
       },
       {
         title: "Overtime System",
