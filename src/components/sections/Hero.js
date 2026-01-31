@@ -35,22 +35,6 @@ export default function Hero() {
                 </span>
               ))}
             </p>
-            
-            <div className={styles.actions}>
-              <Button 
-                href="https://chromewebstore.google.com/detail/cphbbenehbebinbaljljfchnganfadjl?utm_source=item-share-cb" 
-                target="_blank"
-                className={styles.primaryButton}
-              >
-                {t.hero.ctaPrimary}
-              </Button>
-              <Button 
-                href="#how-it-works"
-                className={styles.secondaryButton}
-              >
-                {t.hero.ctaSecondary}
-              </Button>
-            </div>
           </div>
 
           {/* Right: Large Logo */}
@@ -61,6 +45,22 @@ export default function Hero() {
               alt="MindLock Logo Large" 
               className={styles.logoLg}
             />
+          </div>
+
+          <div className={styles.actions}>
+            <Button 
+              href="https://chromewebstore.google.com/detail/cphbbenehbebinbaljljfchnganfadjl?utm_source=item-share-cb" 
+              target="_blank"
+              className={styles.primaryButton}
+            >
+              {t.hero.ctaPrimary}
+            </Button>
+            <Button 
+              href="#how-it-works"
+              className={styles.secondaryButton}
+            >
+              {t.hero.ctaSecondary}
+            </Button>
           </div>
         </div>
       </Container>

@@ -16,7 +16,7 @@ export default function DistractionShield({ className }) {
     let particles = [];
     
     // Shield configuration
-    const SHIELD_RADIUS = 180; // Radius around center where particles bounce
+    let shieldRadius = 180; // Radius around center where particles bounce
     const PARTICLE_COUNT = 80;
     const CENTER_X_PCT = 0.5; // Center X as percentage
     const CENTER_Y_PCT = 0.5; // Center Y as percentage
@@ -30,6 +30,11 @@ export default function DistractionShield({ className }) {
       // Multiplier 2.5 means particles will spawn well outside the logo area
       canvas.width = parent.clientWidth * 2.5;
       canvas.height = parent.clientHeight * 2.5;
+
+      // Responsive Shield Radius
+      // Mobile (< 768px): radius 110 (slightly less close than 85, but closer than 180)
+      // Desktop: 180
+      shieldRadius = window.innerWidth < 768 ? 110 : 180;
     };
 
     window.addEventListener('resize', resizeCanvas);
@@ -101,7 +106,7 @@ export default function DistractionShield({ className }) {
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         // Shield Collision
-        if (!this.bounced && dist < SHIELD_RADIUS) {
+        if (!this.bounced && dist < shieldRadius) {
           const angleToCenter = Math.atan2(dy, dx);
           
           const repelSpeed = 2 + Math.random() * 3;
@@ -159,7 +164,7 @@ export default function DistractionShield({ className }) {
       const time = Date.now() * 0.001;
       const pulse = 1 + Math.sin(time) * 0.05; 
       
-      const gradient = ctx.createRadialGradient(centerX, centerY, SHIELD_RADIUS * 0.1, centerX, centerY, SHIELD_RADIUS * 1.5 * pulse);
+      const gradient = ctx.createRadialGradient(centerX, centerY, shieldRadius * 0.1, centerX, centerY, shieldRadius * 1.5 * pulse);
 
       if (isLight) {
         gradient.addColorStop(0, 'rgba(79, 70, 229, 0.1)'); // Indigo core
@@ -172,7 +177,7 @@ export default function DistractionShield({ className }) {
       }
 
       ctx.beginPath();
-      ctx.arc(centerX, centerY, SHIELD_RADIUS * 1.5 * pulse, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, shieldRadius * 1.5 * pulse, 0, Math.PI * 2);
       ctx.fillStyle = gradient;
       ctx.fill();
       

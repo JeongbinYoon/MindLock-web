@@ -80,7 +80,7 @@ export const en = {
       "Daily Focus Stats at a Glance"
     ],
     tryDemo: "Test Interface",
-    simulationTitle: "👉 Start Focus Mode!",
+    simulationTitle: "Start Focus Mode!",
     simulationDesc: "Start the timer to instantly block registered distracting sites. Try it!",
     browser: {
       tagline: "The Ultimate Solution<br/>for Digital Detox",

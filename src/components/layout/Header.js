@@ -73,6 +73,7 @@ export default function Header() {
             <ThemeToggle />
             <Button 
               variant="primary" 
+              className={styles.headerCta}
               href="https://chromewebstore.google.com/detail/cphbbenehbebinbaljljfchnganfadjl?utm_source=item-share-cb"
               target="_blank"
               style={{ padding: '0.5rem 1rem', fontSize: '0.875rem' }}

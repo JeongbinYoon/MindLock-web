@@ -80,7 +80,7 @@ export const ko = {
       "한눈에 파악하는 오늘의 집중 현황"
     ],
     tryDemo: "체험해보기",
-    simulationTitle: "👉 집중 모드를 시작해보세요!",
+    simulationTitle: "집중 모드를 시작해보세요!",
     simulationDesc: "타이머를 켜면 등록된 방해 사이트 접속이 즉시 차단됩니다. 체험해보세요!",
     browser: {
       tagline: "디지털 디톡스를 위한<br/>가장 강력한 솔루션",

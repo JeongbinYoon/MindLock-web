@@ -79,3 +79,13 @@
 .navLink:hover::after {
   width: 100%;
 }
+
+.headerCta {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .headerCta {
+    display: inline-flex;
+  }
+}

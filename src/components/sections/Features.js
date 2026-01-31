@@ -25,7 +25,7 @@ export default function Features() {
             const Icon = featureIcons[idx];
             return (
               <div key={idx} className={styles.card}>
-                <div className={styles.cardInner}>
+                <div className={`${styles.cardInner} ${item.badge ? styles.hasBadge : ''}`}>
                   {item.badge && <span className={styles.badge}>{item.badge}</span>}
                   <div className={styles.iconWrapper}>
                     <Icon size={24} strokeWidth={2} />

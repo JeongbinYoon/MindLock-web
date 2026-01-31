@@ -12,8 +12,12 @@
 
 .header {
   text-align: center;
-  margin-bottom: 6rem;
+  margin-bottom: 3rem; /* Mobile */
   scroll-margin-top: 6rem;
+}
+
+@media (min-width: 768px) {
+  .header { margin-bottom: 6rem; }
 }
 
 .title {
@@ -31,7 +35,7 @@
   position: relative;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 0 0 2rem 0; /* Removed top padding */
 }
 
 /* Vertical Line */
@@ -128,13 +132,21 @@
   .step {
     flex-direction: column;
     align-items: flex-start;
-    padding-left: 5rem;
+    padding-left: 3rem; /* Tighter padding */
+    margin-bottom: 3rem;
   }
 
   .number {
-    left: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    left: 1.25rem; /* Touching left edge (center at 1.25 = width/2) */
     top: 0;
     transform: translate(-50%, 0);
+  }
+
+  .timeline::before {
+    left: 1.25rem; /* Align line */
   }
 
   .content {

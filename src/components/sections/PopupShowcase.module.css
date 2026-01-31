@@ -1,6 +1,6 @@
 .section {
   position: relative;
-  padding: 8rem 0;
+  padding: 4rem 0; /* Unified mobile spacing */
   background-color: var(--background);
   color: var(--foreground);
   overflow: hidden;
@@ -9,6 +9,12 @@
 
 :global(.light) .section {
   background-color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 8rem 0;
+  }
 }
 
 .container {
@@ -44,11 +50,32 @@
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: 1.75rem; /* Mobile optimized */
   font-weight: 800;
   line-height: 1.2;
+  word-break: keep-all;
 }
 
+@media (min-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+}
+
+
+
+.mobileEmoji {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+.desktopEmoji {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobileEmoji { display: none; }
+  .desktopEmoji { display: inline-block; margin-right: 0.5rem; }
+}
 .description {
   color: var(--muted-text);
   font-size: 1.125rem;

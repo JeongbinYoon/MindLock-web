@@ -62,8 +62,7 @@ export default function PopupShowcase() {
             ))}
           </div>
 
-          <div style={{ marginTop: '2.5rem' }}>
-          <div style={{ marginTop: '2.5rem' }}>
+          <div style={{ marginTop: '1.5rem' }}>
              <p style={{ 
                 color: '#4ade80', 
                 fontWeight: '700', 
@@ -73,13 +72,14 @@ export default function PopupShowcase() {
                 gap: '8px',
                 marginBottom: '0.5rem'
              }}>
+                <span className={styles.desktopEmoji}>👉</span>
+                <span className={styles.mobileEmoji}>👇</span>
                 {t.popup.simulationTitle}
              </p>
              <p 
                 style={{ fontSize: '0.95rem', color: '#6b7280', lineHeight: '1.5' }}
                 dangerouslySetInnerHTML={{ __html: t.popup.simulationDesc }}
              />
-          </div>
           </div>
         </div>
 
