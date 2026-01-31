@@ -2,10 +2,10 @@
 
 import Container from '../ui/Container';
 import styles from './Features.module.css';
-import { Shield, Zap, Clock,  BarChart3, MessageSquare, Globe } from 'lucide-react';
+import { Shield, Zap, Clock,  BarChart3, MessageSquare, Globe, Calendar } from 'lucide-react';
 import { useLanguage } from '../providers/LanguageProvider';
 
-const featureIcons = [Shield, Clock, BarChart3, Zap, MessageSquare, Globe];
+const featureIcons = [Shield, Clock, Zap, BarChart3, MessageSquare, Globe, Calendar];
 
 export default function Features() {
   const { t } = useLanguage();
@@ -25,11 +25,16 @@ export default function Features() {
             const Icon = featureIcons[idx];
             return (
               <div key={idx} className={styles.card}>
-                <div className={styles.iconWrapper}>
-                  <Icon size={24} strokeWidth={2} />
+                <div className={styles.cardInner}>
+                  {item.badge && <span className={styles.badge}>{item.badge}</span>}
+                  <div className={styles.iconWrapper}>
+                    <Icon size={24} strokeWidth={2} />
+                  </div>
+                  <div className={styles.textContent}>
+                    <h3 className={styles.cardTitle}>{item.title}</h3>
+                    <p className={styles.cardDesc}>{item.desc}</p>
+                  </div>
                 </div>
-                <h3 className={styles.cardTitle}>{item.title}</h3>
-                <p className={styles.cardDesc}>{item.desc}</p>
               </div>
             );
           })}

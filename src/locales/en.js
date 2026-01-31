@@ -28,12 +28,12 @@ export const en = {
         desc: "From precise minute settings to stopwatch mode. Freely configure everything from short sprints to Deep Work sessions."
       },
       {
-        title: "Intuitive Dashboard & Analytics",
-        desc: "Analyze your immersive time and distraction patterns. Visualize your growth footprint with contribution graphs."
-      },
-      {
         title: "Overtime System",
         desc: "Flow state peaking when the timer ends? Don't break the flow—record 'Overtime' to maximize your achievement."
+      },
+      {
+        title: "Intuitive Dashboard & Analytics",
+        desc: "Analyze your immersive time and distraction patterns. Visualize your growth footprint with contribution graphs."
       },
       {
         title: "Anti-Give-Up Provocations",
@@ -42,6 +42,11 @@ export const en = {
       {
         title: "Perfect Global Language Support",
         desc: "Fully supports multiple languages including Korean and English, allowing anyone to use it conveniently without language barriers."
+      },
+      {
+        title: "Smart Scheduling",
+        desc: "Automatically activate focus mode at preset times.\nAn automation system for consistent habits.",
+        badge: "Coming Soon"
       }
     ]
   },
