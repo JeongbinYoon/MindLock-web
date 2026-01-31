@@ -1,6 +1,6 @@
 import Container from '../ui/Container';
 import styles from './Features.module.css';
-import { Shield, Zap, Clock,  BarChart3, MessageSquare, Moon } from 'lucide-react';
+import { Shield, Zap, Clock,  BarChart3, MessageSquare, Globe } from 'lucide-react';
 
 const features = [
   {
@@ -29,9 +29,9 @@ const features = [
     desc: "의지가 흔들려 타이머를 끄려 할 때, 위트 있고 날카로운 문구가 당신의 초심을 다시 깨워줍니다."
   },
   {
-    icon: Moon,
-    title: "편리한 언어 설정 & 다크 모드",
-    desc: "한국어/영어의 완벽한 다국어 지원과 눈이 편안한 다크 모드로 언제 어디서나 최적의 환경을 제공합니다."
+    icon: Globe,
+    title: "완벽한 글로벌 언어 지원",
+    desc: "한국어와 영어 등 다국어를 완벽하게 지원하여, 언어의 장벽 없이 누구나 편리하게 사용할 수 있습니다."
   }
 ];
 

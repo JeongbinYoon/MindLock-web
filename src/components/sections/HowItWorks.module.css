@@ -1,0 +1,139 @@
+.section {
+  padding: 8rem 0;
+  background-color: #050505;
+  color: white;
+  position: relative;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  color: #9ca3af;
+  font-size: 1.125rem;
+}
+
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* Vertical Line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, #4f46e5, transparent);
+  transform: translateX(-50%);
+}
+
+.step {
+  position: relative;
+  margin-bottom: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.step:last-child {
+  margin-bottom: 0;
+}
+
+/* Step Content (Left/Right alternation handled in JS or via nth-child) */
+.content {
+  width: 45%;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.content:hover {
+  transform: translateY(-5px);
+  border-color: rgba(129, 140, 248, 0.5);
+}
+
+.step:nth-child(odd) .content {
+  margin-right: auto; /* Left side */
+  text-align: right;
+}
+
+.step:nth-child(even) .content {
+  margin-left: auto; /* Right side */
+  text-align: left;
+}
+
+/* Number Circle */
+.number {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 4rem;
+  height: 4rem;
+  background: #0f172a;
+  border: 2px solid #6366f1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #818cf8;
+  z-index: 2;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+}
+
+.stepTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: white;
+  word-break: keep-all;
+}
+
+.stepDesc {
+  color: #9ca3af;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 2rem;
+  }
+  
+  .step {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 5rem;
+  }
+
+  .number {
+    left: 2rem;
+    top: 0;
+    transform: translate(-50%, 0);
+  }
+
+  .content {
+    width: 100%;
+    text-align: left !important;
+    margin: 0 !important;
+  }
+}
