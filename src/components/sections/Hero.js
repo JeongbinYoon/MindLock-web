@@ -10,7 +10,7 @@ export default function Hero() {
   const { t } = useLanguage();
 
   return (
-    <section className={styles.hero}>
+    <section id="intro" className={styles.hero}>
       {/* Dark Abstract Background */}
       <div className={styles.backgroundWrapper}>
       </div>

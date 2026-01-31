@@ -1,6 +1,8 @@
 export const ko = {
   header: {
+    intro: "소개",
     features: "주요 기능",
+    demo: "체험하기",
     usage: "사용 방법",
     github: "GitHub",
     addToChrome: "Chrome에 추가"
@@ -73,8 +75,8 @@ export const ko = {
       "한눈에 파악하는 오늘의 집중 현황"
     ],
     tryDemo: "체험해보기",
-    simulationTitle: "⚡️ 집중 모드 시뮬레이션",
-    simulationDesc: "타이머를 켜면 유튜브, 틱톡 등 방해 사이트가 즉시 잠깁니다.<br/>직접 테스트하며 강력한 차단 효과를 경험해보세요.",
+    simulationTitle: "👉 집중 모드를 시작해보세요!",
+    simulationDesc: "타이머를 켜면 등록된 방해 사이트 접속이 즉시 차단됩니다. 체험해보세요!",
     browser: {
       tagline: "디지털 디톡스를 위한<br/>가장 강력한 솔루션",
       searchPlaceholder: "검색 또는 URL 입력",

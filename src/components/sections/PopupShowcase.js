@@ -9,16 +9,29 @@ import Button from '../ui/Button';
 
 export default function PopupShowcase() {
   const { t } = useLanguage();
-  const [isPopupOpen, setIsPopupOpen] = useState(true);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [extStatus, setExtStatus] = useState('idle');
   const [activePage, setActivePage] = useState('newtab'); // 'newtab', 'google', 'youtube', 'instagram', 'facebook'
   const [isFlipped, setIsFlipped] = useState(false);
   const [blockHistory, setBlockHistory] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [centerInput, setCenterInput] = useState('');
+  const [addressInput, setAddressInput] = useState('');
+  const [isAddressBarFocused, setIsAddressBarFocused] = useState(false);
+
+  const handleSearch = (e) => {
+     if (e.key === 'Enter') {
+        setSearchQuery(e.target.value);
+        setActivePage('google');
+        e.target.blur();
+        setIsAddressBarFocused(false);
+     }
+  };
 
   const handlePageNavigation = (page) => {
     setActivePage(page);
     // If navigating to a blocked site while active, log it
-    if (extStatus !== 'idle' && (page === 'youtube' || page === 'instagram' || page === 'tiktok')) {
+    if (extStatus !== 'idle' && (page === 'youtube' || page === 'google' || page === 'tiktok')) {
        const now = new Date();
        const timeId = Date.now();
        const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
@@ -30,7 +43,7 @@ export default function PopupShowcase() {
     <section className={styles.section}>
       <div className={styles.container}>
         {/* Left: Content */}
-        <div className={styles.content}>
+        <div id="simulation" className={styles.content}>
           <span className={styles.label}>{t.popup.label}</span>
           <h2 className={styles.title}>
             {t.popup.titlePrefix}<br />
@@ -89,13 +102,27 @@ export default function PopupShowcase() {
                      
                      <div className={styles.addressBar}>
                         <Lock size={14} color="#6b7280" />
-                        <span className={styles.urlText} style={{marginLeft:'8px', fontSize:'13px'}}>
-                           {activePage === 'newtab' ? 'mindlock.app' : 
-                            activePage === 'google' ? 'google.com' :
-                            activePage === 'tiktok' ? 'tiktok.com' :
-                            activePage === 'youtube' ? 'youtube.com' : 'instagram.com'}
-                        </span>
-                        <Star size={18} color="#6b7280" style={{fill: 'none', cursor:'pointer'}} />
+                        <input
+                           type="text"
+                           className={styles.urlText}
+                           style={{
+                               marginLeft:'8px', fontSize:'13px', border:'none', outline:'none', 
+                               background:'transparent', width:'100%', color:'#1f2937'
+                           }}
+                           value={
+                               isAddressBarFocused ? addressInput :
+                               activePage === 'newtab' ? 'mindlock.app' : 
+                               activePage === 'google' ? `google.com/search?q=${searchQuery}` :
+                               activePage === 'tiktok' ? 'tiktok.com' :
+                               activePage === 'youtube' ? 'youtube.com' : 'instagram.com'
+                           }
+                           onChange={(e) => setAddressInput(e.target.value)}
+                           onKeyDown={handleSearch}
+                           onFocus={() => { setIsAddressBarFocused(true); setAddressInput(searchQuery); }}
+                           onBlur={() => setIsAddressBarFocused(false)}
+                           spellCheck={false}
+                        />
+                        <Star size={18} color="#6b7280" style={{fill: 'none', cursor:'pointer', flexShrink:0}} />
                      </div>
 
                      <div className={styles.toolbarActions}>
@@ -172,24 +199,44 @@ export default function PopupShowcase() {
                                  {/* Search Bar Mock */}
                                  <div style={{
                                     width: '100%', maxWidth: '300px', margin: '0 auto 30px auto',
-                                    background: 'white', borderRadius: '24px', padding: '10px 16px',
+                                    background: 'white', borderRadius: '24px', padding: '0 16px',
                                     display: 'flex', alignItems: 'center', gap: '10px',
                                     boxShadow: '0 2px 5px rgba(0,0,0,0.05), 0 0 0 1px #e5e7eb',
-                                    cursor: 'text'
+                                    height: '46px'
                                  }}>
-                                    <Search size={16} color="#9ca3af" />
-                                    <span style={{ fontSize: '13px', color: '#9ca3af' }}>{t.popup.browser.searchPlaceholder}</span>
+                                    <Search size={16} color="#9ca3af" style={{flexShrink:0}} />
+                                    <input 
+                                       type="text"
+                                       placeholder={t.popup.browser.searchPlaceholder}
+                                       value={centerInput}
+                                       onChange={(e) => setCenterInput(e.target.value)}
+                                       onKeyDown={handleSearch}
+                                       style={{
+                                          border:'none', outline:'none', fontSize:'14px', color:'#1f2937', 
+                                          width:'100%', height:'100%', background:'transparent'
+                                       }}
+                                    />
                                  </div>
 
                                  {/* Shortcuts Mock */}
                                  <div style={{ display: 'flex', justifyContent: 'center', gap: '24px' }}>
-                                    {/* Google */}
+                                    {/* Google - Distraction */}
                                     <div onClick={(e) => { e.stopPropagation(); handlePageNavigation('google'); }} style={{
                                        width: '40px', height: '40px', borderRadius: '50%', background: 'white',
                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                       boxShadow: '0 1px 3px rgba(0,0,0,0.1)', cursor: 'pointer'
+                                       boxShadow: '0 1px 3px rgba(0,0,0,0.1)', cursor: 'pointer',
+                                       position: 'relative'
                                     }}>
                                        <span style={{ fontSize: '18px', fontWeight: 'bold', background: 'linear-gradient(135deg, #4285F4, #EA4335, #FBBC05, #34A853)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>G</span>
+                                       <div style={{
+                                          position: 'absolute', bottom: '-5px', right: '-5px',
+                                          width: '22px', height: '22px', borderRadius: '50%',
+                                          background: '#ef4444', border: '2px solid white',
+                                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                          boxShadow: '0 1px 2px rgba(0,0,0,0.2)'
+                                       }}>
+                                          <Lock size={12} color="white" />
+                                       </div>
                                     </div>
                                     
                                     {/* YouTube - Distraction */}
@@ -204,33 +251,23 @@ export default function PopupShowcase() {
                                           <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="white"/>
                                        </svg>
                                        <div style={{
-                                          position: 'absolute', bottom: '-6px', right: '-6px',
-                                          width: '18px', height: '18px', borderRadius: '50%',
+                                          position: 'absolute', bottom: '-7px', right: '-7px',
+                                          width: '22px', height: '22px', borderRadius: '50%',
                                           background: '#ef4444', border: '2px solid white',
                                           display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                          boxShadow: '0 1px 2px rgba(0,0,0,0.1)'
+                                          boxShadow: '0 1px 2px rgba(0,0,0,0.2)'
                                        }}>
-                                          <Lock size={10} color="white" />
+                                          <Lock size={12} color="white" />
                                        </div>
                                     </div>
 
-                                    {/* Instagram - Distraction */}
+                                    {/* Instagram - Unblocked */}
                                     <div onClick={(e) => { e.stopPropagation(); handlePageNavigation('instagram'); }} style={{
                                        width: '40px', height: '40px', borderRadius: '50%', background: 'white',
                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                       boxShadow: '0 1px 3px rgba(0,0,0,0.1)', cursor: 'pointer',
-                                       position: 'relative'
+                                       boxShadow: '0 1px 3px rgba(0,0,0,0.1)', cursor: 'pointer'
                                     }}>
                                         <Instagram size={20} color="#E1306C" />
-                                        <div style={{
-                                          position: 'absolute', bottom: '-6px', right: '-6px',
-                                          width: '18px', height: '18px', borderRadius: '50%',
-                                          background: '#ef4444', border: '2px solid white',
-                                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                          boxShadow: '0 1px 2px rgba(0,0,0,0.1)'
-                                       }}>
-                                          <Lock size={10} color="white" />
-                                       </div>
                                     </div>
                                     
                                     {/* TikTok */}
@@ -248,13 +285,30 @@ export default function PopupShowcase() {
                            )}
 
                            {/* Unlocked Page Mock */}
-                           {((activePage !== 'newtab' && (activePage === 'google' || activePage === 'tiktok')) || 
-                             ((activePage === 'youtube' || activePage === 'instagram') && extStatus === 'idle')) && (
+                           {((activePage !== 'newtab' && activePage === 'instagram') || 
+                             ((activePage === 'youtube' || activePage === 'google' || activePage === 'tiktok') && extStatus === 'idle')) && (
                               <div style={{ textAlign: 'center' }}>
                                  {activePage === 'google' ? (
                                     <>
-                                       <span style={{ fontSize: '40px', fontWeight: 'bold', background: 'linear-gradient(135deg, #4285F4, #EA4335, #FBBC05, #34A853)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', display:'block', marginBottom:'20px' }}>Google</span>
-                                       <div style={{ width: '200px', height: '30px', borderRadius: '15px', border: '1px solid #ddd', margin: '0 auto' }} />
+                                       <span style={{ fontSize: '36px', fontWeight: 'bold', background: 'linear-gradient(135deg, #4285F4, #EA4335, #FBBC05, #34A853)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', display:'block', marginBottom:'20px' }}>Google</span>
+                                       
+                                       <div style={{ 
+                                          width: '100%', maxWidth:'300px', height: '36px', borderRadius: '18px', 
+                                          border: '1px solid #dfe1e5', margin: '0 auto 20px auto',
+                                          display: 'flex', alignItems: 'center', padding: '0 15px', gap: '8px',
+                                          boxShadow: '0 1px 6px rgba(32,33,36,.28)', background:'white'
+                                       }}>
+                                          <Search size={14} color="#9aa0a6" />
+                                          <span style={{ fontSize:'14px', color:'#202124', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>
+                                             {searchQuery || "MindLock"}
+                                          </span>
+                                       </div>
+
+                                       <div style={{ width: '100%', maxWidth:'280px', margin:'0 auto', textAlign:'left' }}>
+                                          <div style={{ height:'14px', width:'150px', background:'#e0e7ff', borderRadius:'4px', marginBottom:'6px' }} />
+                                          <div style={{ height:'10px', width:'100%', background:'#f3f4f6', borderRadius:'4px', marginBottom:'4px' }} />
+                                          <div style={{ height:'10px', width:'90%', background:'#f3f4f6', borderRadius:'4px', marginBottom:'4px' }} />
+                                       </div>
                                     </>
                                  ) : activePage === 'tiktok' ? (
                                     <div style={{ width: '100%', height: '100%', display:'flex', flexDirection:'column', alignItems:'center', gap:'10px' }}>
@@ -281,8 +335,8 @@ export default function PopupShowcase() {
                               </div>
                            )}
 
-                           {/* Blocked Page Mock (YouTube/Instagram) - ONLY IF ACTIVE */}
-                           {(activePage === 'youtube' || activePage === 'instagram') && extStatus !== 'idle' && (
+                           {/* Blocked Page Mock (YouTube/Google/TikTok) - ONLY IF ACTIVE */}
+                           {(activePage === 'youtube' || activePage === 'google' || activePage === 'tiktok') && extStatus !== 'idle' && (
                               <div style={{ 
                                  width: '100%', height: '100%', background: '#111827', 
                                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
@@ -297,7 +351,7 @@ export default function PopupShowcase() {
                                  <h2 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>{t.popup.browser.siteBlockedTitle}</h2>
                                  <p 
                                     style={{ fontSize: '13px', color: '#9ca3af', marginBottom: '20px' }}
-                                    dangerouslySetInnerHTML={{ __html: t.popup.browser.siteBlockedDesc.replace('{site}', activePage === 'youtube' ? 'YouTube' : 'Instagram') }}
+                                    dangerouslySetInnerHTML={{ __html: t.popup.browser.siteBlockedDesc.replace('{site}', activePage === 'youtube' ? 'YouTube' : activePage === 'tiktok' ? 'TikTok' : 'Google') }}
                                  />
                                  <button onClick={(e) => { e.stopPropagation(); setActivePage('newtab'); }} style={{ 
                                     padding: '8px 16px', background: 'white', color: 'black', 
@@ -368,6 +422,9 @@ export default function PopupShowcase() {
                                            }}>
                                               {item.site === 'youtube' && <Youtube size={16} color="#FF0000" />}
                                               {item.site === 'instagram' && <Instagram size={16} color="#E1306C" />}
+                                              {item.site === 'google' && (
+                                                <span style={{ fontSize: '16px', fontWeight: 'bold', background: 'linear-gradient(135deg, #4285F4, #EA4335, #FBBC05, #34A853)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>G</span>
+                                              )}
                                               {item.site === 'tiktok' && (
                                                   <svg width="16" height="16" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
@@ -376,7 +433,7 @@ export default function PopupShowcase() {
                                            </div>
                                            <div style={{ display:'flex', flexDirection:'column' }}>
                                               <span style={{ fontSize:'14px', fontWeight:'600', color:'#374151' }}>
-                                                 {item.site === 'youtube' ? 'YouTube' : item.site === 'instagram' ? 'Instagram' : 'TikTok'}
+                                                 {item.site === 'youtube' ? 'YouTube' : item.site === 'instagram' ? 'Instagram' : item.site === 'tiktok' ? 'TikTok' : 'Google'}
                                               </span>
                                               <span style={{ fontSize:'12px', color:'#ef4444', fontWeight:'500' }}>Blocked</span>
                                            </div>

@@ -1,6 +1,8 @@
 export const en = {
   header: {
+    intro: "Intro",
     features: "Features",
+    demo: "Demo",
     usage: "How To Use",
     github: "GitHub",
     addToChrome: "Add to Chrome"
@@ -73,8 +75,8 @@ export const en = {
       "Daily Focus Stats at a Glance"
     ],
     tryDemo: "Test Interface",
-    simulationTitle: "⚡️ Focus Mode Simulation",
-    simulationDesc: "When the timer starts, distractions like YouTube and TikTok are instantly blocked.<br/>Test it yourself and experience the powerful blocking effect.",
+    simulationTitle: "👉 Start Focus Mode!",
+    simulationDesc: "Start the timer to instantly block registered distracting sites. Try it!",
     browser: {
       tagline: "The Ultimate Solution<br/>for Digital Detox",
       searchPlaceholder: "Search or type URL",

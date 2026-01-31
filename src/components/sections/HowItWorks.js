@@ -8,9 +8,9 @@ export default function HowItWorks() {
   const { t } = useLanguage();
 
   return (
-    <section id="how-it-works" className={styles.section}>
+    <section className={styles.section}>
       <Container>
-        <div className={styles.header}>
+        <div id="how-it-works" className={styles.header}>
           <h2 className={styles.title}>{t.howItWorks.sectionTitle}</h2>
           <p className={styles.subtitle}>{t.howItWorks.sectionSubtitle}</p>
         </div>

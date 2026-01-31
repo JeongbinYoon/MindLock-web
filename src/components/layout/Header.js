@@ -25,11 +25,26 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleNavClick = (e, id) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header className={`${styles.header} ${isScrolled ? styles.headerScrolled : ''}`}>
       <Container>
         <div className={styles.inner}>
-          <Link href="/" className={styles.logo}>
+          <Link 
+            href="#" 
+            className={styles.logo}
+            onClick={(e) => { 
+              e.preventDefault(); 
+              window.scrollTo({ top: 0, behavior: 'smooth' }); 
+            }}
+          >
             <img 
               src="/assets/mindlock-logo.png" 
               alt="MindLock Logo" 
@@ -39,15 +54,18 @@ export default function Header() {
           </Link>
           
           <nav className={styles.nav}>
-            <Link href="#features" className={styles.navLink}>
+            <a href="#intro" className={styles.navLink} onClick={(e) => handleNavClick(e, 'intro')}>
+              {t.header.intro}
+            </a>
+            <a href="#simulation" className={styles.navLink} onClick={(e) => handleNavClick(e, 'simulation')}>
+              {t.header.demo}
+            </a>
+            <a href="#features" className={styles.navLink} onClick={(e) => handleNavClick(e, 'features')}>
               {t.header.features}
-            </Link>
-            <Link href="#how-it-works" className={styles.navLink}>
+            </a>
+            <a href="#how-it-works" className={styles.navLink} onClick={(e) => handleNavClick(e, 'how-it-works')}>
               {t.header.usage}
-            </Link>
-            <Link href="https://github.com/Start-to-finish-project/MindLock" target="_blank" className={styles.navLink}>
-              {t.header.github}
-            </Link>
+            </a>
           </nav>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
