@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import styles from './ExtensionMockup.module.css';
 import { useLanguage } from '../providers/LanguageProvider';
 
-export default function ExtensionMockup() {
+export default function ExtensionMockup({ onStatusChange }) {
   const { t } = useLanguage();
   
   // States
@@ -50,6 +50,12 @@ export default function ExtensionMockup() {
   };
 
   // --- Display Updates ---
+  useEffect(() => {
+    if (onStatusChange) {
+      onStatusChange(status);
+    }
+  }, [status, onStatusChange]);
+
   useEffect(() => {
     if (status === 'idle') {
       setDisplayTime('');

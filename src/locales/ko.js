@@ -83,7 +83,7 @@ export const ko = {
     stopwatchDesc: "시간 제한 없이<br />집중하고 싶을 때 사용하세요.",
     startFocus: "집중 시작하기",
     pause: "일시정지",
-    resume: "다시 시작",
+    resume: "재개",
     stop: "종료",
     guiltModalTitle: "잠깐!",
     guiltMessages: [

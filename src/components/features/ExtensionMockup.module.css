@@ -1,6 +1,7 @@
 /* Ported from popup.css */
 
 .container {
+  position: relative;
   width: 320px;
   /* margin: 0; padding: 20px; removed to be controlled by parent layout if needed, 
      but keeping internal padding */
