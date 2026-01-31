@@ -81,7 +81,14 @@ export const ko = {
       backButton: "뒤로가기",
       siteBlockedTitle: "사이트 차단됨",
       siteBlockedDesc: "MindLock이 당신의 집중을 지키고 있습니다.<br/>현재 {site} 접속이 제한되었습니다.",
-      closeTab: "탭 닫기"
+      closeTab: "탭 닫기",
+      viewHistory: "차단 기록 보기"
+    },
+    history: {
+      title: "집중 모드 차단 내역",
+      empty: "타이머를 켜고 방해 사이트에 접속해보세요.<br/>차단 기록이 여기에 쌓입니다.",
+      back: "타이머로 돌아가기",
+      itemBlocked: "{site} 접속 차단"
     }
   },
   extension: {

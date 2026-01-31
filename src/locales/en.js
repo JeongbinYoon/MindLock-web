@@ -81,7 +81,14 @@ export const en = {
       backButton: "Go Back",
       siteBlockedTitle: "Site Blocked",
       siteBlockedDesc: "MindLock is keeping you focused.<br/>{site} is currently restricted.",
-      closeTab: "Close Tab"
+      closeTab: "Close Tab",
+      viewHistory: "View Block History"
+    },
+    history: {
+      title: "Focus Mode History",
+      empty: "Start the timer and access distracting sites.<br/>Blocked history will appear here.",
+      back: "Back to Timer",
+      itemBlocked: "Blocked {site}"
     }
   },
   extension: {

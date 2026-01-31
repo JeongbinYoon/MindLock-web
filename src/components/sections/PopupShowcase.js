@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { CheckCircle2, Lock, Star, Puzzle, MoreVertical, Search, Youtube, Instagram, Facebook } from 'lucide-react';
+import { CheckCircle2, Lock, Star, Puzzle, MoreVertical, Search, Youtube, Instagram, Facebook, History, ArrowLeft, XCircle } from 'lucide-react';
 import styles from './PopupShowcase.module.css';
 import { useLanguage } from '../providers/LanguageProvider';
 import ExtensionMockup from '../features/ExtensionMockup';
@@ -12,6 +12,19 @@ export default function PopupShowcase() {
   const [isPopupOpen, setIsPopupOpen] = useState(true);
   const [extStatus, setExtStatus] = useState('idle');
   const [activePage, setActivePage] = useState('newtab'); // 'newtab', 'google', 'youtube', 'instagram', 'facebook'
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [blockHistory, setBlockHistory] = useState([]);
+
+  const handlePageNavigation = (page) => {
+    setActivePage(page);
+    // If navigating to a blocked site while active, log it
+    if (extStatus !== 'idle' && (page === 'youtube' || page === 'instagram' || page === 'tiktok')) {
+       const now = new Date();
+       const timeId = Date.now();
+       const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+       setBlockHistory(prev => [{ id: timeId, site: page, time: timeStr }, ...prev]);
+    }
+  };
 
   return (
     <section className={styles.section}>
@@ -60,7 +73,12 @@ export default function PopupShowcase() {
         {/* Right: Tilted Mockup or Interactive Demo */}
         <div className={styles.imageWrapper}>
             <div className={styles.mockup} style={{ background: 'transparent', border: 'none', padding: 0 }}>
-               <div className={styles.browserWindow}>
+               
+               <div className={styles.flipContainer}>
+                  <div className={`${styles.flipper} ${isFlipped ? styles.flipped : ''}`}>
+                     {/* Front Face: Interactive Browser */}
+                     <div className={styles.front}>
+                        <div className={styles.browserWindow}>
                   {/* Browser Header */}
                   <div className={styles.browserHeader}>
                      <div className={styles.trafficLights}>
@@ -166,7 +184,7 @@ export default function PopupShowcase() {
                                  {/* Shortcuts Mock */}
                                  <div style={{ display: 'flex', justifyContent: 'center', gap: '24px' }}>
                                     {/* Google */}
-                                    <div onClick={(e) => { e.stopPropagation(); setActivePage('google'); }} style={{
+                                    <div onClick={(e) => { e.stopPropagation(); handlePageNavigation('google'); }} style={{
                                        width: '40px', height: '40px', borderRadius: '50%', background: 'white',
                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
                                        boxShadow: '0 1px 3px rgba(0,0,0,0.1)', cursor: 'pointer'
@@ -175,7 +193,7 @@ export default function PopupShowcase() {
                                     </div>
                                     
                                     {/* YouTube - Distraction */}
-                                    <div onClick={(e) => { e.stopPropagation(); setActivePage('youtube'); }} style={{
+                                    <div onClick={(e) => { e.stopPropagation(); handlePageNavigation('youtube'); }} style={{
                                        width: '40px', height: '40px', borderRadius: '50%', background: 'white',
                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
                                        boxShadow: '0 1px 3px rgba(0,0,0,0.1)', cursor: 'pointer',
@@ -197,7 +215,7 @@ export default function PopupShowcase() {
                                     </div>
 
                                     {/* Instagram - Distraction */}
-                                    <div onClick={(e) => { e.stopPropagation(); setActivePage('instagram'); }} style={{
+                                    <div onClick={(e) => { e.stopPropagation(); handlePageNavigation('instagram'); }} style={{
                                        width: '40px', height: '40px', borderRadius: '50%', background: 'white',
                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
                                        boxShadow: '0 1px 3px rgba(0,0,0,0.1)', cursor: 'pointer',
@@ -216,7 +234,7 @@ export default function PopupShowcase() {
                                     </div>
                                     
                                     {/* TikTok */}
-                                    <div onClick={(e) => { e.stopPropagation(); setActivePage('tiktok'); }} style={{
+                                    <div onClick={(e) => { e.stopPropagation(); handlePageNavigation('tiktok'); }} style={{
                                        width: '40px', height: '40px', borderRadius: '50%', background: 'white',
                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
                                        boxShadow: '0 1px 3px rgba(0,0,0,0.1)', cursor: 'pointer'
@@ -290,17 +308,105 @@ export default function PopupShowcase() {
                                  </button>
                               </div>
                            )}
+                         </div>
+                         
+                         {/* View History Button */}
+                         <div 
+                            className={styles.viewHistoryBtn}
+                            onClick={(e) => { e.stopPropagation(); setIsFlipped(true); }}
+                         >
+                            <History size={14} />
+                            <span>{t.popup.browser.viewHistory}</span>
+                         </div>
+                      </div>
+                      <div 
+                         className={styles.popupWrapper} 
+                         style={{ display: isPopupOpen ? 'block' : 'none' }}
+                      >
+                         <div onClick={(e) => e.stopPropagation()}>
+                            <ExtensionMockup onStatusChange={setExtStatus} />
+                         </div>
+                      </div>
+                   </div>
+                   </div>
+                 </div>
+
+                 {/* Back Face: History UI */}
+                 <div className={styles.back}>
+                    <div className={styles.browserWindow} style={{ height: '100%', background: '#f9fafb' }}>
+                        {/* Simple Header for History */}
+                        <div className={styles.browserHeader} style={{ background: '#eef2ff', justifyContent:'center' }}>
+                            <div style={{ display:'flex', alignItems:'center', gap:'8px' }}>
+                               <History size={16} color="#4f46e5" />
+                               <span style={{ fontWeight:'700', color: '#4338ca', fontSize:'14px' }}>{t.popup.history.title}</span>
+                            </div>
                         </div>
-                     </div>
-                     <div 
-                        className={styles.popupWrapper} 
-                        style={{ display: isPopupOpen ? 'block' : 'none' }}
-                     >
-                        <div onClick={(e) => e.stopPropagation()}>
-                           <ExtensionMockup onStatusChange={setExtStatus} />
+
+                        <div className={styles.browserContent} style={{ minHeight:0, flex:1, flexDirection: 'column', padding: '0', background:'#fff' }}>
+                            <div style={{ flex:1, overflowY:'auto', padding:'20px', display:'flex', flexDirection:'column', gap:'10px' }}>
+                               {blockHistory.length === 0 ? (
+                                  <div style={{ 
+                                     height:'100%', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', 
+                                     color:'#9ca3af', fontSize:'14px', textAlign:'center', lineHeight:'1.5'
+                                  }}>
+                                     <div style={{ marginBottom:'15px', opacity:0.5, padding:'20px', background:'#f3f4f6', borderRadius:'50%' }}>
+                                        <XCircle size={32} />
+                                     </div>
+                                     <span dangerouslySetInnerHTML={{ __html: t.popup.history.empty }} />
+                                  </div>
+                               ) : (
+                                  blockHistory.map((item) => (
+                                     <div key={item.id} style={{ 
+                                        display:'flex', alignItems:'center', justifyContent:'space-between',
+                                        padding:'12px 16px', background:'white', borderRadius:'12px', 
+                                        border:'1px solid #f3f4f6', boxShadow:'0 2px 5px rgba(0,0,0,0.03)'
+                                     }}>
+                                        <div style={{ display:'flex', alignItems:'center', gap:'12px' }}>
+                                           <div style={{ 
+                                              width:'32px', height:'32px', borderRadius:'8px', background:'#f9fafb', 
+                                              display:'flex', alignItems:'center', justifyContent:'center' 
+                                           }}>
+                                              {item.site === 'youtube' && <Youtube size={16} color="#FF0000" />}
+                                              {item.site === 'instagram' && <Instagram size={16} color="#E1306C" />}
+                                              {item.site === 'tiktok' && (
+                                                  <svg width="16" height="16" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                                                  </svg>
+                                              )}
+                                           </div>
+                                           <div style={{ display:'flex', flexDirection:'column' }}>
+                                              <span style={{ fontSize:'14px', fontWeight:'600', color:'#374151' }}>
+                                                 {item.site === 'youtube' ? 'YouTube' : item.site === 'instagram' ? 'Instagram' : 'TikTok'}
+                                              </span>
+                                              <span style={{ fontSize:'12px', color:'#ef4444', fontWeight:'500' }}>Blocked</span>
+                                           </div>
+                                        </div>
+                                        <span style={{ fontSize:'13px', color:'#9ca3af', fontFamily:'monospace', background:'#f3f4f6', padding:'2px 6px', borderRadius:'4px' }}>
+                                           {item.time}
+                                        </span>
+                                     </div>
+                                  ))
+                               )}
+                            </div>
+
+                            <div style={{ padding:'20px', borderTop:'1px solid #f3f4f6', background:'white' }}>
+                               <button 
+                                  onClick={(e) => { e.stopPropagation(); setIsFlipped(false); }}
+                                  style={{
+                                     width:'100%', padding:'12px', background:'#4f46e5', color:'white',
+                                     border:'none', borderRadius:'10px', fontWeight:'600', fontSize:'14px', cursor:'pointer',
+                                     display:'flex', alignItems:'center', justifyContent:'center', gap:'8px',
+                                     transition: 'transform 0.1s', boxShadow:'0 4px 6px rgba(79, 70, 229, 0.2)'
+                                  }}
+                               >
+                                  <ArrowLeft size={16} />
+                                  {t.popup.history.back}
+                               </button>
+                            </div>
                         </div>
-                     </div>
-                  </div>
+                    </div>
+                 </div>
+              </div>
                </div>
             </div>
         </div>

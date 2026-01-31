@@ -79,24 +79,17 @@
   position: relative;
   width: 100%;
   max-width: 400px;
-  border-radius: 1rem;
-  background: var(--card-bg);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--card-border);
-  box-shadow: 
-    0 25px 50px -12px rgba(0, 0, 0, 0.2),
-    0 0 30px rgba(99, 102, 241, 0.15);
+  /* Visuals moved to browserWindow */
   
   /* The Tilt Effect */
   transform: rotateY(-15deg) rotateX(5deg);
   transition: transform 0.5s ease;
+  transform-style: preserve-3d;
 }
 
 .mockup:hover {
   transform: rotateY(0deg) rotateX(0deg) scale(1.02);
-  box-shadow: 
-    0 25px 50px -12px rgba(0, 0, 0, 0.2),
-    0 0 50px rgba(99, 102, 241, 0.3);
+  /* Hover shadow effect also moved/removed */
 }
 
 .mockupImage {
@@ -114,6 +107,12 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  
+  /* Visuals from mockup */
+  border: 1px solid #e5e7eb;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(99, 102, 241, 0.15);
 }
 
 .browserHeader {
@@ -272,4 +271,70 @@
 @keyframes hintBounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
+}
+
+/* 3D Flip Animation */
+.flipContainer {
+  perspective: 1000px;
+  width: 100%;
+  height: 100%;
+}
+
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.front, .back {
+  /* backface-visibility: hidden;  <-- Chrome issue with some elements, try keeping visible but z-index? */
+  backface-visibility: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.back {
+  transform: rotateY(180deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%; 
+  /* Visual styles handled by inner browserWindow */
+}
+
+.viewHistoryBtn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  border: 1px solid #e5e7eb;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b5563;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: all 0.2s;
+  z-index: 5;
+}
+.viewHistoryBtn:hover {
+  background: white;
+  color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
