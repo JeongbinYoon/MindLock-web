@@ -62,17 +62,27 @@ export const ko = {
     ]
   },
   popup: {
-    label: "Extension Popup", // Keep English or "확장 프로그램 팝업"
-    titlePrefix: "복잡한 설정 없이,",
-    titleHighlight: "단 1초 만에 몰입 시작",
-    description: "브라우저 상단 아이콘을 클릭하기만 하세요. 직관적인 UI로 방해 차단부터 타이머 설정까지, 모든 기능을 즉시 제어할 수 있습니다.",
+    label: "크롬 익스텐션",
+    titlePrefix: "가장 빠르고 간편하게,",
+    titleHighlight: "1초 만에 몰입 시작",
+    description: "더 이상 설정 때문에 시간을 낭비하지 마세요. 직관적인 팝업으로 타이머를 켜는 순간, 당신을 방해하는 모든 디지털 소음이 사라집니다.",
     features: [
-      "원클릭 즉시 차단 (On/Off)",
-      "현재 집중 상태 실시간 확인",
-      "오버타임(Overtime) 자동 기록",
-      "가볍고 빠른 실행 속도"
+      "유튜브/SNS 즉시 강력 차단",
+      "해이해진 마음을 찌르는 도발 메시지",
+      "흐름을 끊지 않는 오버타임 기록",
+      "한눈에 파악하는 오늘의 집중 현황"
     ],
-    tryDemo: "체험해보기"
+    tryDemo: "체험해보기",
+    simulationTitle: "⚡️ 집중 모드 시뮬레이션",
+    simulationDesc: "타이머를 켜면 유튜브, 틱톡 등 방해 사이트가 즉시 잠깁니다.<br/>직접 테스트하며 강력한 차단 효과를 경험해보세요.",
+    browser: {
+      tagline: "디지털 디톡스를 위한<br/>가장 강력한 솔루션",
+      searchPlaceholder: "검색 또는 URL 입력",
+      backButton: "뒤로가기",
+      siteBlockedTitle: "사이트 차단됨",
+      siteBlockedDesc: "MindLock이 당신의 집중을 지키고 있습니다.<br/>현재 {site} 접속이 제한되었습니다.",
+      closeTab: "탭 닫기"
+    }
   },
   extension: {
     settings: "설정",

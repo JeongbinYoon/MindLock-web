@@ -62,17 +62,27 @@ export const en = {
     ]
   },
   popup: {
-    label: "Extension Popup",
-    titlePrefix: "No complex setup,",
-    titleHighlight: "Start focusing in 1 second",
-    description: "Just click the icon in the browser toolbar. Control everything from blocking to timer settings instantly with an intuitive UI.",
+    label: "Chrome Extension",
+    titlePrefix: "Fastest & Simplest,",
+    titleHighlight: "Start Focus in 1 Sec",
+    description: "Stop wasting time on settings. The moment you turn on the timer via the intuitive popup, all digital noise distracting you disappears.",
     features: [
-      "One-click Instant Blocking (On/Off)",
-      "Real-time Focus Status Check",
-      "Automatic Overtime Recording",
-      "Lightweight and Fast Performance"
+      "Instant & Powerful Site Blocking",
+      "Witty Provocations to Keep You Focused",
+      "Seamless Overtime Tracking",
+      "Daily Focus Stats at a Glance"
     ],
-    tryDemo: "Test Interface"
+    tryDemo: "Test Interface",
+    simulationTitle: "⚡️ Focus Mode Simulation",
+    simulationDesc: "When the timer starts, distractions like YouTube and TikTok are instantly blocked.<br/>Test it yourself and experience the powerful blocking effect.",
+    browser: {
+      tagline: "The Ultimate Solution<br/>for Digital Detox",
+      searchPlaceholder: "Search or type URL",
+      backButton: "Go Back",
+      siteBlockedTitle: "Site Blocked",
+      siteBlockedDesc: "MindLock is keeping you focused.<br/>{site} is currently restricted.",
+      closeTab: "Close Tab"
+    }
   },
   extension: {
     settings: "Settings",
