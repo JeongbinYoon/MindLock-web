@@ -1,6 +1,7 @@
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import ThemeProvider from "../components/providers/ThemeProvider";
+import { LanguageProvider } from "../components/providers/LanguageProvider";
 
 import "./globals.css";
 
@@ -17,11 +18,13 @@ export default function RootLayout({ children }) {
     <html lang="ko" suppressHydrationWarning>
       <body>
         <ThemeProvider>
-          <Header />
-          <main style={{ minHeight: 'calc(100vh - 300px)' }}>
-            {children}
-          </main>
-          <Footer />
+          <LanguageProvider>
+            <Header />
+            <main style={{ minHeight: 'calc(100vh - 300px)' }}>
+              {children}
+            </main>
+            <Footer />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

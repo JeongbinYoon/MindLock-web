@@ -94,16 +94,16 @@
 }
 
 .title {
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
   color: var(--foreground);
 }
 
 @media (min-width: 768px) {
   .title {
-    font-size: 4.5rem;
+    font-size: 5rem;
   }
 }
 
@@ -117,6 +117,7 @@
   color: var(--muted-text);
   line-height: 1.6;
   word-break: keep-all;
+  white-space: pre-line;
 }
 
 .actions {

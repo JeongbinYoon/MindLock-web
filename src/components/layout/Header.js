@@ -5,10 +5,13 @@ import Link from 'next/link';
 import Container from '../ui/Container';
 import Button from '../ui/Button';
 import ThemeToggle from '../ui/ThemeToggle';
+import LanguageToggle from '../ui/LanguageToggle';
 import styles from './Header.module.css';
+import { useLanguage } from '../providers/LanguageProvider';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +31,7 @@ export default function Header() {
         <div className={styles.inner}>
           <Link href="/" className={styles.logo}>
             <img 
-              src="/assets/마인드락 로고.png" 
+              src="/assets/mindlock-logo.png" 
               alt="MindLock Logo" 
               style={{ height: '32px', width: 'auto' }} 
             />
@@ -37,17 +40,18 @@ export default function Header() {
           
           <nav className={styles.nav}>
             <Link href="#features" className={styles.navLink}>
-              주요 기능
+              {t.header.features}
             </Link>
             <Link href="#how-it-works" className={styles.navLink}>
-              사용 방법
+              {t.header.usage}
             </Link>
             <Link href="https://github.com/Start-to-finish-project/MindLock" target="_blank" className={styles.navLink}>
-              GitHub
+              {t.header.github}
             </Link>
           </nav>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <LanguageToggle />
             <ThemeToggle />
             <Button 
               variant="primary" 
@@ -55,7 +59,7 @@ export default function Header() {
               target="_blank"
               style={{ padding: '0.5rem 1rem', fontSize: '0.875rem' }}
             >
-              Chrome에 추가
+              {t.header.addToChrome}
             </Button>
           </div>
         </div>

@@ -1,9 +1,14 @@
+'use client';
+
 import Container from '../ui/Container';
 import Button from '../ui/Button';
 import styles from './Hero.module.css';
 import DistractionShield from './DistractionShield';
+import { useLanguage } from '../providers/LanguageProvider';
 
 export default function Hero() {
+  const { t } = useLanguage();
+
   return (
     <section className={styles.hero}>
       {/* Dark Abstract Background */}
@@ -14,26 +19,15 @@ export default function Hero() {
         <div className={styles.inner}>
           {/* Left: Text Content */}
           <div className={styles.content}>
-            {/* Logo/Brand Area */}
-            <div className={styles.logoWrapper}>
-              {/* Note: If logo image is dark, might need brightness filter in CSS. 
-                  Added brightness(0) invert(1) in CSS for logoIcon just in case. */}
-              <img 
-                src="/assets/마인드락 로고.png" 
-                alt="MindLock Logo" 
-                className={styles.logoIcon}
-              />
-              <span className={styles.logoText}>MindLock</span>
-            </div>
+            {/* Logo removed for cleaner design */}
 
             <h1 className={styles.title}>
-              오직 나에게<br />집중하는 시간
-              <span className={styles.highlight}>마인드락</span>
+              {t.hero.titlePrefix}<br />{t.hero.titleSuffix}
+              <span className={styles.highlight}>{t.hero.brand}</span>
             </h1>
             
             <p className={styles.description}>
-              자꾸만 유튜브, SNS로 손이 가시나요?<br/>생산성을 저해하는 웹사이트를 완벽하게 차단하고 집중 시간을 관리하세요. 
-              복잡한 설정 없이, 클릭 한 번으로 나만의 몰입 시스템을 완성하세요.
+              {t.hero.description}
             </p>
             
             <div className={styles.actions}>
@@ -42,13 +36,13 @@ export default function Hero() {
                 target="_blank"
                 className={styles.primaryButton}
               >
-                Chrome에 무료 추가
+                {t.hero.ctaPrimary}
               </Button>
               <Button 
                 href="#how-it-works"
                 className={styles.secondaryButton}
               >
-                기능 살펴보기
+                {t.hero.ctaSecondary}
               </Button>
             </div>
           </div>
@@ -57,7 +51,7 @@ export default function Hero() {
           <div className={styles.imageArea}>
             <DistractionShield />
             <img 
-              src="/assets/마인드락 로고.png" 
+              src="/assets/mindlock-logo.png" 
               alt="MindLock Logo Large" 
               className={styles.logoLg}
             />

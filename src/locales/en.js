@@ -1,0 +1,80 @@
+export const en = {
+  header: {
+    features: "Features",
+    usage: "How To Use",
+    github: "GitHub",
+    addToChrome: "Add to Chrome"
+  },
+  hero: {
+    titlePrefix: "Time to Focus",
+    titleSuffix: "Only on You",
+    brand: "MindLock",
+    description: "Keep reaching for YouTube or Social Media? \nCompletely block distracting websites and manage your focus time. \nBuild your immersive system with a single click, no complex setup required.",
+    ctaPrimary: "Add to Chrome - It's Free",
+    ctaSecondary: "Explore Features"
+  },
+  features: {
+    sectionTitle: "Why MindLock?",
+    sectionSubtitle: "More than just a blocker.\nWe provide every tool for your digital wellbeing and productivity.",
+    items: [
+      {
+        title: "Impenetrable Website Blocking",
+        desc: "Block distracting sites like SNS and shopping malls instantly. Manage subdomains together for a perfectly isolated environment."
+      },
+      {
+        title: "Smart Timer & Stopwatch",
+        desc: "From precise minute settings to stopwatch mode. Freely configure everything from short sprints to Deep Work sessions."
+      },
+      {
+        title: "Intuitive Dashboard & Analytics",
+        desc: "Analyze your immersive time and distraction patterns. Visualize your growth footprint with GitHub-style contribution graphs."
+      },
+      {
+        title: "Overtime System",
+        desc: "Flow state peaking when the timer ends? Don't break the flow—record 'Overtime' to maximize your achievement."
+      },
+      {
+        title: "Anti-Give-Up Provocations",
+        desc: "When your will wavers and you try to disable the timer, witty and sharp messages awaken your initial resolve."
+      },
+      {
+        title: "Perfect Global Language Support",
+        desc: "Fully supports multiple languages including Korean and English, allowing anyone to use it conveniently without language barriers."
+      }
+    ]
+  },
+  howItWorks: {
+    sectionTitle: "How to Use",
+    sectionSubtitle: "Your immersive system in 3 steps",
+    steps: [
+      {
+        title: "Add to Chrome for Free",
+        desc: "Install MindLock from the Chrome Web Store for free.\nUse it immediately without any sign-up."
+      },
+      {
+        title: "Customize Your Environment",
+        desc: "Customize your blocklist, alarm sounds,\nand provocation messages in the options page to suit your taste."
+      },
+      {
+        title: "Start Immersion with One Click",
+        desc: "Set the timer and press start.\nYour immersive system activates instantly."
+      }
+    ]
+  },
+  popup: {
+    label: "Extension Popup",
+    titlePrefix: "No complex setup,",
+    titleHighlight: "Start focusing in 1 second",
+    description: "Just click the icon in the browser toolbar. Control everything from blocking to timer settings instantly with an intuitive UI.",
+    features: [
+      "One-click Instant Blocking (On/Off)",
+      "Real-time Focus Status Check",
+      "Automatic Overtime Recording",
+      "Lightweight and Fast Performance"
+    ]
+  },
+  footer: {
+    rights: "All rights reserved.",
+    privacy: "Privacy"
+  }
+};

@@ -1,61 +1,38 @@
+'use client';
+
 import Container from '../ui/Container';
 import styles from './Features.module.css';
 import { Shield, Zap, Clock,  BarChart3, MessageSquare, Globe } from 'lucide-react';
+import { useLanguage } from '../providers/LanguageProvider';
 
-const features = [
-  {
-    icon: Shield,
-    title: "빈틈없는 웹사이트 차단",
-    desc: "SNS, 쇼핑몰 등 방해 사이트를 칼같이 차단합니다. 서브도메인까지 한 번에 관리하여 완벽한 격리 환경을 만듭니다."
-  },
-  {
-    icon: Clock,
-    title: "스마트 타이머 & 스톱워치",
-    desc: "분 단위의 정밀한 설정부터 스톱워치 모드까지. 짧은 집중부터 딥워크(Deep Work)까지 자유롭게 설정하세요."
-  },
-  {
-    icon: BarChart3,
-    title: "직관적인 대시보드 & 성장 통계",
-    desc: "오늘의 몰입 시간과 딴짓 패턴을 분석하고, GitHub 스타일의 잔디 그래프로 성장의 발자취를 시각화하세요."
-  },
-  {
-    icon: Zap,
-    title: "오버타임(Overtime) 시스템",
-    desc: "타이머가 끝나도 몰입이 최고조라면? 흐름을 끊지 않고 '초과 집중 시간'을 기록하여 성취감을 극대화합니다."
-  },
-  {
-    icon: MessageSquare,
-    title: "포기 방지 도발 메시지",
-    desc: "의지가 흔들려 타이머를 끄려 할 때, 위트 있고 날카로운 문구가 당신의 초심을 다시 깨워줍니다."
-  },
-  {
-    icon: Globe,
-    title: "완벽한 글로벌 언어 지원",
-    desc: "한국어와 영어 등 다국어를 완벽하게 지원하여, 언어의 장벽 없이 누구나 편리하게 사용할 수 있습니다."
-  }
-];
+const featureIcons = [Shield, Clock, BarChart3, Zap, MessageSquare, Globe];
 
 export default function Features() {
+  const { t } = useLanguage();
+
   return (
     <section id="features" className={styles.features}>
       <Container>
         <div className={styles.header}>
-          <h2 className={styles.title}>왜 MindLock인가요?</h2>
-          <p className={styles.subtitle}>
-            단순한 차단기 그 이상입니다.<br/>당신의 디지털 웰빙과 생산성을 위한 모든 도구를 제공합니다.
+          <h2 className={styles.title}>{t.features.sectionTitle}</h2>
+          <p className={styles.subtitle} style={{ whiteSpace: 'pre-line' }}>
+            {t.features.sectionSubtitle}
           </p>
         </div>
         
         <div className={styles.grid}>
-          {features.map((feature, idx) => (
-            <div key={idx} className={styles.card}>
-              <div className={styles.iconWrapper}>
-                <feature.icon size={24} strokeWidth={2} />
+          {t.features.items.map((item, idx) => {
+            const Icon = featureIcons[idx];
+            return (
+              <div key={idx} className={styles.card}>
+                <div className={styles.iconWrapper}>
+                  <Icon size={24} strokeWidth={2} />
+                </div>
+                <h3 className={styles.cardTitle}>{item.title}</h3>
+                <p className={styles.cardDesc}>{item.desc}</p>
               </div>
-              <h3 className={styles.cardTitle}>{feature.title}</h3>
-              <p className={styles.cardDesc}>{feature.desc}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </Container>
     </section>
