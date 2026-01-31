@@ -42,7 +42,7 @@ export default function Features() {
         <div className={styles.header}>
           <h2 className={styles.title}>왜 MindLock인가요?</h2>
           <p className={styles.subtitle}>
-            단순한 차단기 그 이상입니다. 당신의 디지털 웰빙과 생산성을 위한 모든 도구를 제공합니다.
+            단순한 차단기 그 이상입니다.<br/>당신의 디지털 웰빙과 생산성을 위한 모든 도구를 제공합니다.
           </p>
         </div>
         

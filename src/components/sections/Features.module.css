@@ -1,8 +1,9 @@
 .features {
   padding: 8rem 0;
-  background-color: #050505; /* Deep dark background */
+  background-color: var(--background);
   position: relative;
   overflow: hidden;
+  transition: background-color 0.3s ease;
 }
 
 /* Diagonal Background Divider */
@@ -30,15 +31,12 @@
   font-weight: 800;
   margin-bottom: 1.5rem;
   letter-spacing: -0.025em;
-  color: white;
-  background: linear-gradient(to right, #fff, #a5b4fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--foreground);
 }
 
 .subtitle {
   font-size: 1.25rem;
-  color: #9ca3af;
+  color: var(--muted-text);
   max-width: 42rem;
   margin: 0 auto;
   line-height: 1.7;
@@ -65,28 +63,32 @@
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
   padding: 2.5rem;
   border-radius: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--card-border);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02); /* Very subtle base shadow */
+}
+
+:global(.light) .card {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025); /* Stronger shadow for light mode depth */
 }
 
 .card:hover {
   transform: translateY(-8px);
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(129, 140, 248, 0.3);
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border-color: var(--primary);
 }
 
 .iconWrapper {
   display: inline-flex;
   padding: 1rem;
-  background-color: rgba(79, 70, 229, 0.2);
-  color: #818cf8;
+  background-color: rgba(79, 70, 229, 0.1);
+  color: var(--primary);
   border-radius: 1rem;
   margin-bottom: 1.5rem;
   transition: transform 0.3s ease;
@@ -94,7 +96,7 @@
 
 .card:hover .iconWrapper {
   transform: scale(1.1) rotate(5deg);
-  background-color: rgba(79, 70, 229, 0.3);
+  background-color: var(--primary);
   color: white;
 }
 
@@ -102,11 +104,11 @@
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: white;
+  color: var(--foreground);
 }
 
 .cardDesc {
-  color: #9ca3af;
+  color: var(--muted-text);
   line-height: 1.7;
   font-size: 1.05rem;
 }

@@ -1,8 +1,9 @@
 .footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--card-border);
   padding: 4rem 0;
-  background-color: #050505; /* Matches page bg */
-  color: #9ca3af;
+  background-color: var(--footer-bg);
+  color: var(--muted-text);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .inner {
@@ -21,7 +22,7 @@
 
 .copy {
   font-size: 0.875rem;
-  color: #6b7280;
+  color: var(--muted-text);
 }
 
 .links {
@@ -31,10 +32,10 @@
 
 .link {
   font-size: 0.875rem;
-  color: #9ca3af;
+  color: var(--muted-text);
   transition: color 0.2s;
 }
 
 .link:hover {
-  color: white;
+  color: var(--foreground);
 }

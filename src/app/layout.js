@@ -1,5 +1,7 @@
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
+import ThemeProvider from "../components/providers/ThemeProvider";
+
 import "./globals.css";
 
 export const metadata = {
@@ -12,13 +14,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <body>
-        <Header />
-        <main style={{ minHeight: 'calc(100vh - 300px)' }}>
-          {children}
-        </main>
-        <Footer />
+        <ThemeProvider>
+          <Header />
+          <main style={{ minHeight: 'calc(100vh - 300px)' }}>
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

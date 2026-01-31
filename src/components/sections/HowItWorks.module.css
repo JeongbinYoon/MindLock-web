@@ -1,8 +1,13 @@
 .section {
   padding: 8rem 0;
-  background-color: #050505;
-  color: white;
+  background-color: var(--background);
+  color: var(--foreground);
   position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+:global(.light) .section {
+  background-color: #ffffff;
 }
 
 .header {
@@ -17,7 +22,7 @@
 }
 
 .subtitle {
-  color: #9ca3af;
+  color: var(--muted-text);
   font-size: 1.125rem;
 }
 
@@ -36,7 +41,7 @@
   left: 50%;
   width: 2px;
   height: 100%;
-  background: linear-gradient(to bottom, transparent, #4f46e5, transparent);
+  background: linear-gradient(to bottom, transparent, var(--timeline-line), transparent);
   transform: translateX(-50%);
 }
 
@@ -52,30 +57,29 @@
   margin-bottom: 0;
 }
 
-/* Step Content (Left/Right alternation handled in JS or via nth-child) */
 .content {
   width: 45%;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
   padding: 2rem;
   border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--card-border);
   position: relative;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .content:hover {
   transform: translateY(-5px);
-  border-color: rgba(129, 140, 248, 0.5);
+  border-color: var(--primary);
 }
 
 .step:nth-child(odd) .content {
-  margin-right: auto; /* Left side */
+  margin-right: auto;
   text-align: right;
 }
 
 .step:nth-child(even) .content {
-  margin-left: auto; /* Right side */
+  margin-left: auto;
   text-align: left;
 }
 
@@ -87,29 +91,30 @@
   transform: translate(-50%, -50%);
   width: 4rem;
   height: 4rem;
-  background: #0f172a;
-  border: 2px solid #6366f1;
+  background: var(--background);
+  border: 2px solid var(--primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
   font-weight: 800;
-  color: #818cf8;
+  color: var(--primary);
   z-index: 2;
-  box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+  transition: background-color 0.3s ease;
 }
 
 .stepTitle {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: white;
+  color: var(--foreground);
   word-break: keep-all;
 }
 
 .stepDesc {
-  color: #9ca3af;
+  color: var(--muted-text);
   line-height: 1.6;
   word-break: keep-all;
 }

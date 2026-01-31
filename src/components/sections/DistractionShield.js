@@ -1,9 +1,11 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useTheme } from 'next-themes';
 
 export default function DistractionShield({ className }) {
   const canvasRef = useRef(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -18,6 +20,8 @@ export default function DistractionShield({ className }) {
     const PARTICLE_COUNT = 80;
     const CENTER_X_PCT = 0.5; // Center X as percentage
     const CENTER_Y_PCT = 0.5; // Center Y as percentage
+
+    const isLight = theme === 'light';
 
     // Resize handler
     const resizeCanvas = () => {
@@ -63,11 +67,24 @@ export default function DistractionShield({ className }) {
         this.vy = Math.sin(angle) * speed;
 
         this.size = 1 + Math.random() * 2;
-        this.color = `rgba(${200 + Math.random() * 55}, ${200 + Math.random() * 55}, 255, ${0.1 + Math.random() * 0.3})`;
+        
+        // Color Selection
+        if (isLight) {
+           // Light Mode: Deep Indigo (Brand Color) instead of Black
+           // varied shades of indigo/violet
+           const r = 79 + Math.random() * 20;
+           const g = 70 + Math.random() * 20;
+           const b = 229;
+           this.color = `rgba(${r}, ${g}, ${b}, ${0.3 + Math.random() * 0.4})`;
+        } else {
+           // Original Blue/White for Dark Mode
+           this.color = `rgba(${200 + Math.random() * 55}, ${200 + Math.random() * 55}, 255, ${0.1 + Math.random() * 0.3})`;
+        }
+
         this.bounced = false;
         this.life = 150; // Longer life for longer travel
       }
-// ... (omitted similar update logic)
+
       update() {
         const w = canvas.width;
         const h = canvas.height;
@@ -113,7 +130,12 @@ export default function DistractionShield({ className }) {
         ctx.fillStyle = this.color;
         
         if (this.bounced && this.life > 50) {
-            ctx.fillStyle = `rgba(255, 255, 255, ${this.life / 60})`;
+            // Flash color when bounced
+             if (isLight) {
+               ctx.fillStyle = `rgba(79, 70, 229, ${this.life / 60})`; // Indigo flash
+             } else {
+               ctx.fillStyle = `rgba(255, 255, 255, ${this.life / 60})`;
+             }
         }
         
         ctx.globalAlpha = Math.min(1, this.life / 50); 
@@ -137,18 +159,22 @@ export default function DistractionShield({ className }) {
       const time = Date.now() * 0.001;
       const pulse = 1 + Math.sin(time) * 0.05; 
       
-      // Softer, larger gradient with no hard edge
       const gradient = ctx.createRadialGradient(centerX, centerY, SHIELD_RADIUS * 0.1, centerX, centerY, SHIELD_RADIUS * 1.5 * pulse);
-      gradient.addColorStop(0, 'rgba(129, 140, 248, 0.15)'); // Visible core (Brighter indigo)
-      gradient.addColorStop(0.3, 'rgba(99, 102, 241, 0.1)'); // Soft middle
-      gradient.addColorStop(1, 'rgba(79, 70, 229, 0.0)'); // Fade to transparent
+
+      if (isLight) {
+        gradient.addColorStop(0, 'rgba(79, 70, 229, 0.1)'); // Indigo core
+        gradient.addColorStop(0.3, 'rgba(99, 102, 241, 0.05)');
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0.0)');
+      } else {
+        gradient.addColorStop(0, 'rgba(129, 140, 248, 0.15)'); // Visible core (Brighter indigo)
+        gradient.addColorStop(0.3, 'rgba(99, 102, 241, 0.1)'); // Soft middle
+        gradient.addColorStop(1, 'rgba(79, 70, 229, 0.0)'); // Fade to transparent
+      }
 
       ctx.beginPath();
       ctx.arc(centerX, centerY, SHIELD_RADIUS * 1.5 * pulse, 0, Math.PI * 2);
       ctx.fillStyle = gradient;
       ctx.fill();
-      
-
       
       particles.forEach(p => {
         p.update();
@@ -163,7 +189,7 @@ export default function DistractionShield({ className }) {
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [theme]);
 
   return <canvas ref={canvasRef} className={className} style={{ 
     position: 'absolute', 

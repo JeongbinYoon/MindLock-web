@@ -1,20 +1,34 @@
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 50;
   width: 100%;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: rgba(5, 5, 5, 0.7); /* Dark background */
-  backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent; /* Transparent border initially */
+  background-color: transparent; /* Transparent bg initially */
+  backdrop-filter: blur(0px); /* No blur initially */
   transition: all 0.3s ease;
+}
+
+.headerScrolled {
+  border-bottom: 1px solid var(--card-border);
+  background-color: var(--header-bg);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* Slight shadow when scrolled */
 }
 
 .inner {
   display: flex;
-  height: 4.5rem; /* Slightly taller */
+  height: 4.5rem;
   align-items: center;
   justify-content: space-between;
 }
+
+/* Ensure logo text color is always readable. */
+/* If the top section is dark/gradient, standard foreground usually works well 
+   because it's either white (dark mode) or black (light mode - dark text on white gradient).
+   We don't need to force white text on top usually unless the gradient is very dark in light mode,
+   but current gradient is light in light mode.
+*/
 
 .logo {
   font-weight: 800;
@@ -22,8 +36,9 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: white;
+  color: var(--foreground);
   letter-spacing: -0.025em;
+  transition: color 0.3s ease;
 }
 
 .nav {
@@ -41,13 +56,13 @@
 .navLink {
   font-size: 0.95rem;
   font-weight: 500;
-  color: #9ca3af; /* Gray-400 */
+  color: var(--muted-text);
   transition: color 0.2s;
   position: relative;
 }
 
 .navLink:hover {
-  color: white;
+  color: var(--foreground);
 }
 
 .navLink::after {
@@ -57,7 +72,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #818cf8;
+  background-color: var(--primary);
   transition: width 0.3s ease;
 }
 

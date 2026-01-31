@@ -4,7 +4,31 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  color: white; /* Default text color white for dark theme */
+  color: var(--foreground);
+  /* Glow Animation Variables (Light Mode Default) */
+  --glow-start-inner: rgba(255, 255, 255, 0.8); 
+  --glow-start-outer: rgba(99, 102, 241, 0.5);
+  --glow-end-inner: rgba(255, 255, 255, 1);
+  --glow-end-outer: rgba(67, 56, 202, 0.8);
+  
+  /* Light Mode: Premium Fade (Soft Indigo to Global Off-white) */
+  background: 
+    radial-gradient(circle at 70% 20%, rgba(199, 210, 254, 0.2) 0%, transparent 40%),
+    linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%);
+  transition: background 0.5s ease, color 0.3s ease;
+}
+
+:global(.dark) .hero {
+  /* Glow Animation Variables (Dark Mode) */
+  --glow-start-inner: rgba(165, 180, 252, 0.5);
+  --glow-start-outer: rgba(99, 102, 241, 0.5);
+  --glow-end-inner: rgba(255, 255, 255, 0.7);
+  --glow-end-outer: rgba(99, 102, 241, 0.8);
+
+  /* Dark Mode: Deep Abyss with Subtle Top Highlight */
+  background: 
+    radial-gradient(circle at 50% -20%, rgba(49, 46, 129, 0.4) 0%, transparent 60%),
+    linear-gradient(180deg, #050505 0%, #020202 100%);
 }
 
 .backgroundWrapper {
@@ -14,11 +38,9 @@
   width: 100%;
   height: 100%;
   z-index: 0;
-  background-color: #050505; /* Deep base color */
+  /* background-color is handled by .hero */
   overflow: hidden;
 }
-
-/* Ambient animations removed as per user request */
 
 .inner {
   position: relative;
@@ -54,7 +76,13 @@
   width: 48px;
   height: 48px;
   object-fit: contain;
-  filter: brightness(0) invert(1); /* Make logo white for dark bg if it's black */
+  transition: filter 0.3s ease;
+  /* Default (Light Mode): No filter (assuming logo is black/dark) */
+}
+
+/* Dark Mode: Invert logo to white */
+:global(.dark) .logoIcon {
+  filter: brightness(0) invert(1);
 }
 
 .logoText {
@@ -62,7 +90,7 @@
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: white;
+  color: var(--foreground);
 }
 
 .title {
@@ -70,7 +98,7 @@
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.025em;
-  color: white;
+  color: var(--foreground);
 }
 
 @media (min-width: 768px) {
@@ -80,14 +108,15 @@
 }
 
 .highlight {
-  color: #818cf8; /* Light Indigo for dark background */
+  color: var(--primary);
   display: block;
 }
 
 .description {
   font-size: 1.25rem;
-  color: #d1d5db; /* gray-300 */
+  color: var(--muted-text);
   line-height: 1.6;
+  word-break: keep-all;
 }
 
 .actions {
@@ -95,6 +124,39 @@
   gap: 1rem;
   margin-top: 1.5rem;
   flex-wrap: wrap;
+}
+
+/* Button Styles */
+.primaryButton {
+  background-color: var(--foreground);
+  color: var(--background);
+  font-size: 1.125rem;
+  padding: 1rem 2rem;
+  border: none;
+  font-weight: bold;
+  border-radius: 0.75rem;
+  transition: transform 0.2s, background-color 0.3s, color 0.3s;
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.secondaryButton {
+  background-color: var(--card-bg);
+  backdrop-filter: blur(10px);
+  color: var(--foreground);
+  border: 1px solid var(--card-border);
+  font-size: 1.125rem;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  transition: transform 0.2s, background-color 0.3s, border-color 0.3s;
+}
+
+.secondaryButton:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
 }
 
 .imageArea {
@@ -123,13 +185,11 @@
 
 @keyframes brainPulse {
   0% {
-    /* Sharp bright border + soft glow */
-    filter: drop-shadow(0 0 2px rgba(165, 180, 252, 0.5)) 
-            drop-shadow(0 0 15px rgba(99, 102, 241, 0.5));
+    filter: drop-shadow(0 0 2px var(--glow-start-inner)) 
+            drop-shadow(0 0 15px var(--glow-start-outer));
   }
   100% {
-    /* Brighter, thicker border + stronger glow */
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7)) 
-            drop-shadow(0 0 30px rgba(99, 102, 241, 0.8));
+    filter: drop-shadow(0 -1px 5px var(--glow-end-inner)) 
+            drop-shadow(0 0 30px var(--glow-end-outer));
   }
 }

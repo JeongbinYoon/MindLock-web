@@ -27,12 +27,12 @@ export default function Hero() {
             </div>
 
             <h1 className={styles.title}>
-              오직 나에게 집중하는 시간,<br />
-              <span className={styles.highlight}>MindLock</span>
+              오직 나에게<br />집중하는 시간
+              <span className={styles.highlight}>마인드락</span>
             </h1>
             
             <p className={styles.description}>
-              자꾸만 유튜브, SNS로 손이 가시나요? 생산성을 저해하는 웹사이트를 완벽하게 차단하고 집중 시간을 관리하세요. 
+              자꾸만 유튜브, SNS로 손이 가시나요?<br/>생산성을 저해하는 웹사이트를 완벽하게 차단하고 집중 시간을 관리하세요. 
               복잡한 설정 없이, 클릭 한 번으로 나만의 몰입 시스템을 완성하세요.
             </p>
             
@@ -40,27 +40,13 @@ export default function Hero() {
               <Button 
                 href="https://chromewebstore.google.com/detail/cphbbenehbebinbaljljfchnganfadjl?utm_source=item-share-cb" 
                 target="_blank"
-                style={{ 
-                  backgroundColor: 'white', 
-                  color: 'black', 
-                  fontSize: '1.125rem', 
-                  padding: '1rem 2rem',
-                  border: 'none',
-                  fontWeight: 'bold'
-                }}
+                className={styles.primaryButton}
               >
                 Chrome에 무료 추가
               </Button>
               <Button 
                 href="#how-it-works"
-                style={{ 
-                  backgroundColor: 'rgba(255,255,255,0.1)', 
-                  backdropFilter: 'blur(10px)',
-                  color: 'white',
-                  border: '1px solid rgba(255,255,255,0.2)',
-                  fontSize: '1.125rem', 
-                  padding: '1rem 2rem'
-                }}
+                className={styles.secondaryButton}
               >
                 기능 살펴보기
               </Button>

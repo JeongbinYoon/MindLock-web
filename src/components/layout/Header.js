@@ -1,11 +1,29 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Container from '../ui/Container';
 import Button from '../ui/Button';
+import ThemeToggle from '../ui/ThemeToggle';
 import styles from './Header.module.css';
 
 export default function Header() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    
+    // Initial check
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isScrolled ? styles.headerScrolled : ''}`}>
       <Container>
         <div className={styles.inner}>
           <Link href="/" className={styles.logo}>
@@ -29,7 +47,8 @@ export default function Header() {
             </Link>
           </nav>
 
-          <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <ThemeToggle />
             <Button 
               variant="primary" 
               href="https://chromewebstore.google.com/detail/cphbbenehbebinbaljljfchnganfadjl?utm_source=item-share-cb"
