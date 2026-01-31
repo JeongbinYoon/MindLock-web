@@ -1,18 +1,13 @@
 import Container from '../ui/Container';
 import Button from '../ui/Button';
 import styles from './Hero.module.css';
+import DistractionShield from './DistractionShield';
 
 export default function Hero() {
   return (
     <section className={styles.hero}>
       {/* Dark Abstract Background */}
       <div className={styles.backgroundWrapper}>
-        <img 
-          src="/assets/hero-bg-dark.png" 
-          alt="Dark Abstract Background" 
-          className={styles.backgroundImage} 
-        />
-        <div className={styles.overlay} />
       </div>
 
       <Container>
@@ -32,13 +27,13 @@ export default function Hero() {
             </div>
 
             <h1 className={styles.title}>
-              집중력을 되찾고<br />
-              <span className={styles.highlight}>시간을 지배하세요.</span>
+              오직 나에게 집중하는 시간,<br />
+              <span className={styles.highlight}>MindLock</span>
             </h1>
             
             <p className={styles.description}>
-              MindLock은 당신의 몰입을 방해하는 모든 디지털 소음을 차단합니다. 
-              복잡한 설정 없이, 클릭 한 번으로 시작하세요.
+              자꾸만 유튜브, SNS로 손이 가시나요? 생산성을 저해하는 웹사이트를 완벽하게 차단하고 집중 시간을 관리하세요. 
+              복잡한 설정 없이, 클릭 한 번으로 나만의 몰입 시스템을 완성하세요.
             </p>
             
             <div className={styles.actions}>
@@ -74,6 +69,7 @@ export default function Hero() {
 
           {/* Right: Large Logo */}
           <div className={styles.imageArea}>
+            <DistractionShield />
             <img 
               src="/assets/마인드락 로고.png" 
               alt="MindLock Logo Large" 

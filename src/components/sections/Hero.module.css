@@ -14,29 +14,11 @@
   width: 100%;
   height: 100%;
   z-index: 0;
+  background-color: #050505; /* Deep base color */
+  overflow: hidden;
 }
 
-.backgroundImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* Dark gradient overlay for readability */
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, 
-    rgba(0, 0, 0, 0.9) 0%, 
-    rgba(0, 0, 0, 0.7) 40%, 
-    rgba(0, 0, 0, 0.3) 100%
-  );
-  z-index: 1;
-}
+/* Ambient animations removed as per user request */
 
 .inner {
   position: relative;
@@ -127,17 +109,27 @@
   width: 100%;
   max-width: 500px;
   height: auto;
-  /* Add a glow effect for the dark theme */
-  filter: drop-shadow(0 0 30px rgba(79, 70, 229, 0.4)); 
+  /* Pulsing brain-shaped border glow */
+  animation: brainPulse 2.5s ease-in-out infinite alternate;
+  will-change: filter;
   transition: transform 0.3s ease;
-}
-
-.logoLg:hover {
-  transform: scale(1.05);
 }
 
 @keyframes float {
   0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  50% { transform: translateY(-10px); }
   100% { transform: translateY(0px); }
+}
+
+@keyframes brainPulse {
+  0% {
+    /* Sharp bright border + soft glow */
+    filter: drop-shadow(0 0 2px rgba(165, 180, 252, 0.5)) 
+            drop-shadow(0 0 15px rgba(99, 102, 241, 0.5));
+  }
+  100% {
+    /* Brighter, thicker border + stronger glow */
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7)) 
+            drop-shadow(0 0 30px rgba(99, 102, 241, 0.8));
+  }
 }

@@ -1,37 +1,37 @@
 import Container from '../ui/Container';
 import styles from './Features.module.css';
-import { Shield, Zap, Clock,  BarChart3, MousePointerClick, Moon } from 'lucide-react';
+import { Shield, Zap, Clock,  BarChart3, MessageSquare, Moon } from 'lucide-react';
 
 const features = [
   {
     icon: Shield,
-    title: "강력한 차단",
-    desc: "SNS, 쇼핑, 뉴스 등 집중을 방해하는 사이트를 완벽하게 차단합니다. 우회 걱정 없이 몰입하세요."
+    title: "빈틈없는 웹사이트 차단",
+    desc: "SNS, 쇼핑몰 등 방해 사이트를 칼같이 차단합니다. 서브도메인까지 한 번에 관리하여 완벽한 격리 환경을 만듭니다."
   },
   {
     icon: Clock,
-    title: "타이머 & 스톱워치",
-    desc: "뽀모도로 타이머로 집중 시간을 관리하거나, 스톱워치로 순수 공부 시간을 측정해보세요."
+    title: "스마트 타이머 & 스톱워치",
+    desc: "분 단위의 정밀한 설정부터 스톱워치 모드까지. 짧은 집중부터 딥워크(Deep Work)까지 자유롭게 설정하세요."
   },
   {
     icon: BarChart3,
-    title: "통계 대시보드",
-    desc: "일간 집중 시간과 차단 시도 횟수를 시각적으로 확인하고 성장을 기록하세요."
+    title: "직관적인 대시보드 & 성장 통계",
+    desc: "오늘의 몰입 시간과 딴짓 패턴을 분석하고, GitHub 스타일의 잔디 그래프로 성장의 발자취를 시각화하세요."
   },
   {
     icon: Zap,
-    title: "초경량 퍼포먼스",
-    desc: "브라우저 속도에 영향을 주지 않는 최적화된 설계로 가볍고 빠릅니다."
+    title: "오버타임(Overtime) 시스템",
+    desc: "타이머가 끝나도 몰입이 최고조라면? 흐름을 끊지 않고 '초과 집중 시간'을 기록하여 성취감을 극대화합니다."
   },
   {
-    icon: MousePointerClick,
-    title: "간편한 설정",
-    desc: "복잡한 절차 없이 클릭 몇 번으로 차단 목록을 관리하고 바로 집중 모드를 시작하세요."
+    icon: MessageSquare,
+    title: "포기 방지 도발 메시지",
+    desc: "의지가 흔들려 타이머를 끄려 할 때, 위트 있고 날카로운 문구가 당신의 초심을 다시 깨워줍니다."
   },
   {
     icon: Moon,
-    title: "다크 모드",
-    desc: "눈의 피로를 줄여주는 다크 모드를 완벽하게 지원합니다. 밤늦은 작업도 편안하게."
+    title: "편리한 언어 설정 & 다크 모드",
+    desc: "한국어/영어의 완벽한 다국어 지원과 눈이 편안한 다크 모드로 언제 어디서나 최적의 환경을 제공합니다."
   }
 ];
 
