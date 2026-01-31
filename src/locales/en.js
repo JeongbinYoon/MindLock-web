@@ -71,7 +71,53 @@ export const en = {
       "Real-time Focus Status Check",
       "Automatic Overtime Recording",
       "Lightweight and Fast Performance"
-    ]
+    ],
+    tryDemo: "Test Interface"
+  },
+  extension: {
+    settings: "Settings",
+    timerMode: "Timer",
+    stopwatchMode: "Stopwatch",
+    unitHours: "h",
+    unitMinutes: "m",
+    stopwatchDesc: "Use when you want to focus<br />without time limits.",
+    startFocus: "Start Focus",
+    pause: "Pause",
+    resume: "Resume",
+    stop: "Stop",
+    guiltModalTitle: "Wait!",
+    guiltMessages: [
+      "Look at you, running away again.",
+      "Just turn it off. We knew you couldn't do it anyway lol",
+      "Stop making excuses.\nYou just don't want to do it.",
+      "Just a little more, but you can't even do that lol",
+      "Is 'giving up' your motto?",
+      "Can't you even\nendure this much?",
+      "Already giving up? Disappointing.",
+      "If you stop now, you're a loser.",
+      "You can't achieve anything\nwith this focus.",
+      "You might fail at success,\nbut you're #1 at giving up.",
+      "Others aren't smarter than you,\nyou're just not doing it.",
+      "Compromising again?\nAren't you tired of it?"
+    ],
+    keepFocus: "No way! (Keep Focusing)",
+    giveUp: "Yes, I give up...",
+    remainingTime: "⏳ REMAINING TIME",
+    focusing: "🔥 FOCUSING...",
+    overtime: "🚀 OVERTIME",
+    paused: "☕ PAUSED",
+    goalAchieved: "Goal Achieved!",
+    pauseMessages: [
+      "Hmm..\nwhen exactly are you going to start?",
+      "This is not the time to rest, is it?",
+      "Others are already far ahead of you.",
+      "Look at this,\ntrying to procrastinate again.",
+      "Stopping the timer doesn't stop time.",
+      "Do you really think\nit's okay to rest now?",
+      "Your focus flow is broken.\nIt'll be hard to get back into it.",
+      "Just keep resting.\nLet success rest too."
+    ],
+    confirmGiveUp: "Really give up?"
   },
   footer: {
     rights: "All rights reserved.",

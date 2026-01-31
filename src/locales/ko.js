@@ -71,7 +71,53 @@ export const ko = {
       "현재 집중 상태 실시간 확인",
       "오버타임(Overtime) 자동 기록",
       "가볍고 빠른 실행 속도"
-    ]
+    ],
+    tryDemo: "체험해보기"
+  },
+  extension: {
+    settings: "설정",
+    timerMode: "타이머 설정",
+    stopwatchMode: "스톱워치",
+    unitHours: "시간",
+    unitMinutes: "분",
+    stopwatchDesc: "시간 제한 없이<br />집중하고 싶을 때 사용하세요.",
+    startFocus: "집중 시작하기",
+    pause: "일시정지",
+    resume: "다시 시작",
+    stop: "종료",
+    guiltModalTitle: "잠깐!",
+    guiltMessages: [
+      "이것 봐, 또 도망치려고 하네.",
+      "그냥 끄세요.\n어차피 안 될 거라 생각했잖아요 ㅋ",
+      "핑계 대지 마세요.\n그냥 하기 싫은 거잖아요.",
+      "조금만 더 하면 되는데 그걸 못하네 ㅋ",
+      "작심삼일이 당신의 모토인가요?",
+      "겨우 이것도 못 참으시나요?",
+      "벌써 포기? 실망이네요.",
+      "지금 끄면 패배자가 되는 겁니다.",
+      "이정도 집중력으론 아무것도 못해요.",
+      "성공은 못해도 포기는 1등이시네요.",
+      "남들이 너보다 똑똑한 게 아니야,\n넌 그냥 안 하는 거야.",
+      "또 자신과 타협하시나요?\n지겹지도 않으세요?"
+    ],
+    keepFocus: "아, 아니거든? (계속 집중)",
+    giveUp: "네, 포기합니다...",
+    remainingTime: "⏳ REMAINING TIME",
+    focusing: "🔥 FOCUSING...",
+    overtime: "🚀 OVERTIME",
+    paused: "☕ PAUSED",
+    goalAchieved: "목표 달성!",
+    pauseMessages: [
+      "흠.. 도대체 언제 시작하시는 거죠?",
+      "지금 쉴 때가 아닌 것 같은데요?",
+      "남들은 벌써 저만치 앞서가고 있습니다.",
+      "이것 봐, 또 딴짓하려고.",
+      "타이머 멈춘다고 시간이 멈추진 않아요.",
+      "정말 지금 쉬어도 된다고 생각하세요?",
+      "집중 흐름이 끊겼네요. 다시 잡기 힘들 걸요?",
+      "그냥 계속 쉬세요. 성공도 쉬게."
+    ],
+    confirmGiveUp: "정말 포기하시겠습니까?"
   },
   footer: {
     rights: "All rights reserved.",
