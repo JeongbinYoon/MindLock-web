@@ -76,9 +76,9 @@ export const metadata = {
     },
   },
   icons: {
-    icon: '/assets/logo16.png',
+    icon: '/assets/logo64.png',
     shortcut: '/assets/logo64.png',
-    apple: '/assets/logo128.png',
+    apple: '/assets/logo128.png', // Keep Apple Touch Icon high-res
   },
   alternates: {
     canonical: 'https://mindlock.today',
