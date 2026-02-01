@@ -56,7 +56,7 @@ export default function Hero() {
               {t.hero.ctaPrimary}
             </Button>
             <Button 
-              href="#how-it-works"
+              href="#simulation"
               className={styles.secondaryButton}
             >
               {t.hero.ctaSecondary}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { Play, Pause, Square } from 'lucide-react';
 import styles from './ExtensionMockup.module.css';
 import { useLanguage } from '../providers/LanguageProvider';
 
@@ -22,15 +23,15 @@ export default function ExtensionMockup({ onStatusChange }) {
   
   // UI States
   const [showGuiltModal, setShowGuiltModal] = useState(false);
-  const [currentPauseMsg, setCurrentPauseMsg] = useState('');
-  const [currentGuiltMsg, setCurrentGuiltMsg] = useState('');
+  const [currentPauseMsgIndex, setCurrentPauseMsgIndex] = useState(-1);
+  const [currentGuiltMsgIndex, setCurrentGuiltMsgIndex] = useState(-1);
   
   const timerRef = useRef(null);
 
   // --- Helpers ---
-  const getRandomMessage = (list) => {
-    if (!list || list.length === 0) return '';
-    return list[Math.floor(Math.random() * list.length)];
+  const getRandomIndex = (length) => {
+    if (!length || length === 0) return -1;
+    return Math.floor(Math.random() * length);
   };
 
   const formatMs = (ms) => {
@@ -121,9 +122,9 @@ export default function ExtensionMockup({ onStatusChange }) {
     if (status === 'running') {
       setStatus('paused');
       
-      // Set random pause message
-      const msg = getRandomMessage(t.extension.pauseMessages);
-      setCurrentPauseMsg(msg.replace(/\n/g, '<br/>'));
+      // Set random pause message index
+      const idx = getRandomIndex(t.extension.pauseMessages?.length || 0);
+      setCurrentPauseMsgIndex(idx);
 
       clearInterval(timerRef.current);
       // Store elapsed for resume
@@ -150,9 +151,9 @@ export default function ExtensionMockup({ onStatusChange }) {
     if (status === 'overtime') {
       reset();
     } else {
-      // Set random guilt message
-      const msg = getRandomMessage(t.extension.guiltMessages);
-      setCurrentGuiltMsg(msg.replace(/\n/g, '<br/>'));
+      // Set random guilt message index
+      const idx = getRandomIndex(t.extension.guiltMessages?.length || 0);
+      setCurrentGuiltMsgIndex(idx);
       setShowGuiltModal(true);
     }
   };
@@ -164,8 +165,18 @@ export default function ExtensionMockup({ onStatusChange }) {
     setPausedTime(null);
     setShowGuiltModal(false);
     setDisplayTime('');
-    setCurrentGuiltMsg('');
-    setCurrentPauseMsg('');
+    setCurrentGuiltMsgIndex(-1);
+    setCurrentPauseMsgIndex(-1);
+  };
+
+  const getPauseMessage = () => {
+    if (currentPauseMsgIndex === -1 || !t.extension.pauseMessages) return '';
+    return (t.extension.pauseMessages[currentPauseMsgIndex] || '').replace(/\n/g, '<br/>');
+  };
+
+  const getGuiltMessage = () => {
+    if (currentGuiltMsgIndex === -1 || !t.extension.guiltMessages) return '';
+    return (t.extension.guiltMessages[currentGuiltMsgIndex] || '').replace(/\n/g, '<br/>');
   };
 
   return (
@@ -251,7 +262,7 @@ export default function ExtensionMockup({ onStatusChange }) {
              </h1>
 
              {status === 'paused' && (
-                <p className={styles.pauseMessage} dangerouslySetInnerHTML={{__html: currentPauseMsg}} />
+                <p className={styles.pauseMessage} dangerouslySetInnerHTML={{__html: getPauseMessage()}} />
              )}
           </div>
         )}
@@ -260,7 +271,7 @@ export default function ExtensionMockup({ onStatusChange }) {
         <div className={`${styles.timerControls} ${status !== 'idle' ? styles.timerControlsRunningAdjusted : ''}`}>
            {status === 'idle' && (
              <button className={`${styles.controlBtn} ${styles.startTimerBtn}`} onClick={startTimer}>
-               ▶ {t.extension.startFocus}
+               <Play size={14} fill="currentColor" style={{marginRight: '6px'}} /> {t.extension.startFocus}
              </button>
            )}
 
@@ -268,13 +279,17 @@ export default function ExtensionMockup({ onStatusChange }) {
              <button className={`${styles.controlBtn} ${styles.pauseTimerBtn}`} onClick={pauseTimer}
                style={{ backgroundColor: status === 'paused' ? '#10B981' : '#F59E0B' }}
              >
-               {status === 'paused' ? `▶ ${t.extension.resume}` : `⏸ ${t.extension.pause}`}
+               {status === 'paused' ? (
+                 <><Play size={14} fill="currentColor" style={{marginRight: '6px'}} /> {t.extension.resume}</>
+               ) : (
+                 <><Pause size={14} fill="currentColor" style={{marginRight: '6px'}} /> {t.extension.pause}</>
+               )}
              </button>
            )}
            
            {status !== 'idle' && (
              <button className={`${styles.controlBtn} ${styles.stopBtn}`} onClick={attemptStop}>
-               <span className={styles.iconSquare}></span> {t.extension.stop}
+               <Square size={14} fill="currentColor" style={{marginRight: '6px'}} /> {t.extension.stop}
              </button>
            )}
         </div>
@@ -286,7 +301,7 @@ export default function ExtensionMockup({ onStatusChange }) {
         <div className={styles.modalOverlay}>
            <div className={styles.modalContent}>
               <h3 className={styles.modalTitle}>⛔ {t.extension.guiltModalTitle}</h3>
-              <p className={styles.modalMessage} dangerouslySetInnerHTML={{__html: currentGuiltMsg}} />
+              <p className={styles.modalMessage} dangerouslySetInnerHTML={{__html: getGuiltMessage()}} />
               <div className={styles.modalButtons}>
                  <button className={`${styles.modalBtn} ${styles.keepBtn}`} onClick={() => setShowGuiltModal(false)}>
                    😤 {t.extension.keepFocus}

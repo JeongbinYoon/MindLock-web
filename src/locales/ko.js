@@ -13,7 +13,7 @@ export const ko = {
     brand: "마인드락",
     description: "자꾸만 유튜브, SNS로 손이 가시나요? \n생산성을 저해하는 웹사이트를 완벽하게 차단하고 집중 시간을 관리하세요. \n복잡한 설정 없이, 클릭 한 번으로 나만의 몰입 시스템을 완성하세요.",
     ctaPrimary: "Chrome에 무료 추가",
-    ctaSecondary: "기능 살펴보기"
+    ctaSecondary: "체험하기"
   },
   features: {
     sectionTitle: "왜 MindLock인가요?",

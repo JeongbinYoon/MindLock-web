@@ -18,6 +18,23 @@ export default function Button({
         </a>
       );
     }
+
+    if (href.startsWith('#')) {
+      const handleScroll = (e) => {
+        e.preventDefault();
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
+
+      return (
+        <a href={href} className={combinedClassName} onClick={handleScroll} {...props}>
+          {children}
+        </a>
+      );
+    }
+
     return (
       <Link href={href} className={combinedClassName} {...props}>
         {children}

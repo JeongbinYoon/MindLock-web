@@ -13,7 +13,7 @@ export const en = {
     brand: "MindLock",
     description: "Keep reaching for YouTube or Social Media? \nCompletely block distracting websites and manage your focus time. \nBuild your immersive system with a single click, no complex setup required.",
     ctaPrimary: "Add to Chrome - It's Free",
-    ctaSecondary: "Explore Features"
+    ctaSecondary: "Try Demo"
   },
   features: {
     sectionTitle: "Why MindLock?",

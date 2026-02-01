@@ -106,7 +106,7 @@ export default function PopupShowcase() {
                            type="text"
                            className={styles.urlText}
                            style={{
-                               marginLeft:'8px', fontSize:'13px', border:'none', outline:'none', 
+                               marginLeft:'8px', border:'none', outline:'none', 
                                background:'transparent', width:'100%', color:'#1f2937'
                            }}
                            value={
@@ -212,9 +212,10 @@ export default function PopupShowcase() {
                                        onChange={(e) => setCenterInput(e.target.value)}
                                        onKeyDown={handleSearch}
                                        style={{
-                                          border:'none', outline:'none', fontSize:'14px', color:'#1f2937', 
+                                          border:'none', outline:'none', color:'#1f2937', 
                                           width:'100%', height:'100%', background:'transparent'
                                        }}
+                                       className={styles.searchInput}
                                     />
                                  </div>
 
@@ -331,7 +332,7 @@ export default function PopupShowcase() {
                                        <div style={{ width: '200px', height: '200px', background: '#eee', borderRadius: '4px', marginTop:'10px' }} />
                                     </div>
                                  )}
-                                 <button onClick={(e) => { e.stopPropagation(); setActivePage('newtab'); }} style={{ marginTop: '40px', padding: '5px 10px', fontSize: '11px', background:'#eee', border:'none', borderRadius:'4px', cursor: 'pointer' }}>{t.popup.browser.backButton}</button>
+                                 <button onClick={(e) => { e.stopPropagation(); setActivePage('newtab'); }} className={styles.browserBackBtn}>{t.popup.browser.backButton}</button>
                               </div>
                            )}
 
@@ -353,11 +354,7 @@ export default function PopupShowcase() {
                                     style={{ fontSize: '13px', color: '#9ca3af', marginBottom: '20px' }}
                                     dangerouslySetInnerHTML={{ __html: t.popup.browser.siteBlockedDesc.replace('{site}', activePage === 'youtube' ? 'YouTube' : activePage === 'tiktok' ? 'TikTok' : 'Google') }}
                                  />
-                                 <button onClick={(e) => { e.stopPropagation(); setActivePage('newtab'); }} style={{ 
-                                    padding: '8px 16px', background: 'white', color: 'black', 
-                                    border: 'none', borderRadius: '6px', fontSize: '12px', fontWeight: 'bold',
-                                    cursor: 'pointer'
-                                 }}>
+                                 <button onClick={(e) => { e.stopPropagation(); setActivePage('newtab'); }} className={styles.browserBackBtnBlocked}>
                                     {t.popup.browser.backButton}
                                  </button>
                               </div>
