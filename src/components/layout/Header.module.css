@@ -1,10 +1,14 @@
 .header {
-  position: fixed;
+  position: sticky;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 50;
   width: 100%;
+  margin-bottom: -4.5rem; /* Height of the header */
   border-bottom: 1px solid transparent; /* Transparent border initially */
   background-color: transparent; /* Transparent bg initially */
+  -webkit-backdrop-filter: blur(0px);
   backdrop-filter: blur(0px); /* No blur initially */
   transition: all 0.3s ease;
 }
@@ -12,6 +16,7 @@
 .headerScrolled {
   border-bottom: 1px solid var(--card-border);
   background-color: var(--header-bg);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* Slight shadow when scrolled */
 }
