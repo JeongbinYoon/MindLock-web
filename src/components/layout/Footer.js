@@ -16,10 +16,10 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} MindLock. {t.footer.rights}
           </p>
           <div className={styles.links}>
-            <Link href="https://github.com/Start-to-finish-project/MindLock" target="_blank" className={styles.link}>
+            <Link href="https://github.com/JeongbinYoon/MindLock" target="_blank" className={styles.link}>
               GitHub
             </Link>
-            <Link href="#" className={styles.link}>
+            <Link href="https://lumbar-manuscript-cd7.notion.site/MindLock-Privacy-Policy-2f14769d3c40809b80b9fa82362c7ea1" target="_blank" className={styles.link}>
               {t.footer.privacy}
             </Link>
           </div>

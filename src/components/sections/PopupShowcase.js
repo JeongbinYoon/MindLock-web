@@ -342,30 +342,34 @@ export default function PopupShowcase() {
                               </div>
                            )}
 
-                           {/* Blocked Page Mock (YouTube/Google/TikTok) - ONLY IF ACTIVE */}
-                           {(activePage === 'youtube' || activePage === 'google' || activePage === 'tiktok') && extStatus !== 'idle' && (
-                              <div style={{ 
-                                 width: '100%', height: '100%', background: '#111827', 
-                                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                                 color: 'white', textAlign: 'center'
-                              }}>
-                                 <div style={{ 
-                                    width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(239, 68, 68, 0.2)',
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '15px'
-                                 }}>
-                                    <Lock size={30} color="#ef4444" />
-                                 </div>
-                                 <h2 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>{t.popup.browser.siteBlockedTitle}</h2>
-                                 <p 
-                                    style={{ fontSize: '13px', color: '#9ca3af', marginBottom: '20px' }}
-                                    dangerouslySetInnerHTML={{ __html: t.popup.browser.siteBlockedDesc.replace('{site}', activePage === 'youtube' ? 'YouTube' : activePage === 'tiktok' ? 'TikTok' : 'Google') }}
-                                 />
-                                 <button onClick={(e) => { e.stopPropagation(); setActivePage('newtab'); }} className={styles.browserBackBtnBlocked}>
-                                    {t.popup.browser.backButton}
-                                 </button>
-                              </div>
-                           )}
+
                          </div>
+                         
+                         {/* Blocked Page Mock (YouTube/Google/TikTok) - MOVED OUTSIDE FOR FULL WIDTH */}
+                         {(activePage === 'youtube' || activePage === 'google' || activePage === 'tiktok') && extStatus !== 'idle' && (
+                            <div style={{ 
+                               position: 'absolute', top: 0, left: 0,
+                               width: '100%', height: '100%', background: '#111827', 
+                               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                               color: 'white', textAlign: 'center',
+                               zIndex: 20
+                            }}>
+                               <div style={{ 
+                                  width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(239, 68, 68, 0.2)',
+                                  display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '15px'
+                               }}>
+                                  <Lock size={30} color="#ef4444" />
+                               </div>
+                               <h2 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>{t.popup.browser.siteBlockedTitle}</h2>
+                               <p 
+                                  style={{ fontSize: '13px', color: '#9ca3af', marginBottom: '20px' }}
+                                  dangerouslySetInnerHTML={{ __html: t.popup.browser.siteBlockedDesc.replace('{site}', activePage === 'youtube' ? 'YouTube' : activePage === 'tiktok' ? 'TikTok' : 'Google') }}
+                               />
+                               <button onClick={(e) => { e.stopPropagation(); setActivePage('newtab'); }} className={styles.browserBackBtnBlocked}>
+                                  {t.popup.browser.backButton}
+                               </button>
+                            </div>
+                         )}
                          
                          {/* View History Button */}
                          <div 

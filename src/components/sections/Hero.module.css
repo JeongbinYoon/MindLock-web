@@ -237,7 +237,7 @@
 
 @media (min-width: 1024px) {
   .inner {
-    padding: 2rem;
+    padding: 2rem 0; /* Vertical only, let Container handle horizontal */
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
