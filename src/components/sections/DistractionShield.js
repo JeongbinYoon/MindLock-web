@@ -34,6 +34,11 @@ export default function DistractionShield({ className }) {
 
       // Responsive Shield Radius
       shieldRadius = window.innerWidth < 768 ? 110 : 180;
+      
+      // Re-initialize particles if they exist to prevent "drifting" from old dimensions
+      if (particles && particles.length > 0) {
+        particles.forEach(p => p.reset(true));
+      }
     };
 
     const observer = new ResizeObserver(() => {
