@@ -189,7 +189,8 @@ export default function PopupShowcase() {
                         <div style={{ 
                            position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
                            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                           background: activePage === 'newtab' ? 'transparent' : '#f9fafb'
+                           background: activePage === 'newtab' ? 'transparent' : '#f9fafb',
+                           padding: '0 24px'
                         }}>
                            {activePage === 'newtab' && (
                               <>

@@ -69,7 +69,7 @@ export const ko = {
     ]
   },
   popup: {
-    label: "크롬 익스텐션",
+    label: "체험하기",
     titlePrefix: "가장 빠르고 간편하게,",
     titleHighlight: "1초 만에 몰입 시작",
     description: "더 이상 설정 때문에 시간을 낭비하지 마세요. 직관적인 팝업으로 타이머를 켜는 순간, 당신을 방해하는 모든 디지털 소음이 사라집니다.",

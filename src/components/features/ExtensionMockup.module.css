@@ -2,10 +2,8 @@
 
 .container {
   position: relative;
-  width: 320px;
-  /* margin: 0; padding: 20px; removed to be controlled by parent layout if needed, 
-     but keeping internal padding */
-  padding: 20px;
+  width: 280px; /* Mobile Default */
+  padding: 16px; /* Reduced padding */
   font-family: 'Inter', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -29,26 +27,26 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 12px; /* Reduced margin */
 }
 
 .header h2 {
   margin: 0;
-  font-size: 18px;
+  font-size: 16px; /* Reduced font size */
   font-weight: 700;
   letter-spacing: -0.5px;
-  color: var(--text-color); /* Explicitly set color */
+  color: var(--text-color);
 }
 
 .optionsLink {
-  font-size: 12px;
+  font-size: 11px; /* Reduced font size */
   color: #6b7280;
   text-decoration: none;
-  padding: 6px 10px;
+  padding: 5px 8px; /* Reduced padding */
   background: #e5e7eb;
   border-radius: 20px;
   transition: all 0.2s;
-  cursor: pointer; /* Added for mock */
+  cursor: pointer;
 }
 .optionsLink:hover {
   background: #d1d5db;
@@ -58,10 +56,10 @@
 .timerCard {
   background: var(--card-bg);
   border-radius: 16px;
-  padding: 20px;
+  padding: 16px; /* Reduced padding */
   text-align: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  margin-bottom: 20px;
+  margin-bottom: 16px; /* Reduced margin */
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   color: var(--text-color);
@@ -71,10 +69,10 @@
   display: flex;
   background: #f3f4f6;
   border-radius: 10px;
-  padding: 4px;
-  max-height: 60px;
+  padding: 3px; /* Reduced padding */
+  max-height: 50px; /* Reduced max-height */
   opacity: 1;
-  margin-bottom: 20px;
+  margin-bottom: 16px; /* Reduced margin */
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -90,8 +88,8 @@
 .tabBtn {
   flex: 1;
   border: none;
-  padding: 8px;
-  font-size: 13px;
+  padding: 6px; /* Reduced padding */
+  font-size: 12px; /* Reduced font size */
   font-weight: 600;
   cursor: pointer;
   border-radius: 8px;
@@ -106,7 +104,7 @@
 }
 
 .timerWrapper {
-  min-height: 80px;
+  min-height: 70px; /* Reduced min-height */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -117,7 +115,7 @@
 .pauseMessage {
   position: absolute;
   text-align: center;
-  font-size: 14px; /* Increased from 13 */
+  font-size: 13px; /* Slightly reduced */
   color: #1f2937;
   font-weight: 700;
   display: flex;
@@ -142,37 +140,30 @@
 .timerControls {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 8px; /* Reduced gap */
+  margin-top: 16px; /* Reduced margin */
   transition: margin-top 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .timerControlsRunning {
-  margin-top: 55px; 
+  margin-top: 45px; /* Reduced margin */
 }
-/* From popup.css line 218 override??? Check original logic */
+
 .timerControlsRunningAdjusted { 
-    /* .timer-controls.running calls for margin-top: 10px in line 219, 
-       but line 149 says 55px. Logic in JS applies .running class.
-       Wait, duplicate rule in popup.css?
-       Line 148: .timer-controls.running { margin-top: 55px; }
-       Line 218: .timer-controls.running { margin-top: 10px; }
-       CSS later text wins. So 10px.
-    */
     margin-top: 10px;
 }
 
 .timeInput {
-  font-size: 42px;
-  font-weight: 900; /* Extra Bold */
+  font-size: 36px; /* Reduced font size */
+  font-weight: 900; 
   color: var(--primary-color);
   border: none;
   background: #f3f4f6;
   border-radius: 8px;
-  width: 70px;
+  width: 60px; /* Reduced width */
   text-align: center;
-  padding-top: 6px;
-  height: 60px;
+  padding-top: 4px;
+  height: 50px; /* Reduced height */
   line-height: 1.1;
   font-family: 'Inter', sans-serif;
 }
@@ -195,24 +186,24 @@
 }
 
 .unitLabel {
-  font-size: 16px;
+  font-size: 14px; /* Reduced */
   font-weight: 800;
   color: #6b7280;
-  margin-right: 10px;
+  margin-right: 8px; /* Reduced */
 }
 .inputGroup:last-child .unitLabel {
   margin-right: 0;
 }
 
 .stopwatchDesc {
-  font-size: 14px;
+  font-size: 13px; /* Reduced */
   color: #6b7280;
   line-height: 1.5;
   padding: 5px 0;
 }
 
 .timerDisplay {
-  font-size: 56px;
+  font-size: 48px; /* Reduced from 56px */
   font-weight: 800;
   margin: 0;
   color: var(--primary-color);
@@ -222,18 +213,18 @@
 }
 
 .timerLabel {
-  font-size: 13px;
+  font-size: 12px; /* Reduced */
   font-weight: 700;
   color: #9ca3af;
-  margin-bottom: 5px;
+  margin-bottom: 4px; /* Reduced */
   display: block;
 }
 
 .controlBtn {
   border: none;
   border-radius: 12px;
-  padding: 12px 0;
-  font-size: 15px;
+  padding: 10px 0; /* Reduced padding */
+  font-size: 14px; /* Reduced font size */
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.1s;
@@ -270,7 +261,7 @@
 
 /* Modal */
 .modalOverlay {
-  position: absolute; /* Changed from fixed to absolute to contain within mockup */
+  position: absolute; 
   top: 0;
   left: 0;
   width: 100%;
@@ -283,7 +274,7 @@
   z-index: 1000;
   opacity: 1;
   transition: opacity 0.3s ease;
-  border-radius: 12px; /* Match container radius */
+  border-radius: 12px; 
 }
 .modalOverlay.hidden {
   opacity: 0;
@@ -380,4 +371,76 @@
   background-color: currentColor;
   display: inline-block;
   border-radius: 2px;
+}
+
+/* ==================================================
+   DESKTOP RESTORE (min-width: 768px)
+   ================================================== */
+@media (min-width: 768px) {
+  .container {
+    width: 320px; /* Restore to 320px */
+    padding: 20px;
+  }
+  .header h2 {
+    font-size: 18px;
+  }
+  .optionsLink {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  .timerCard {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .tabs {
+    padding: 4px;
+    max-height: 60px;
+    margin-bottom: 20px;
+  }
+  .tabs.tabsHidden {
+    max-height: 0;
+    padding: 0;
+    margin-bottom: 0;
+    opacity: 0;
+  }
+  .tabBtn {
+    padding: 8px;
+    font-size: 13px;
+  }
+  .timerWrapper {
+    min-height: 80px;
+  }
+  .pauseMessage {
+    font-size: 14px;
+  }
+  .timerControls {
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .timerControlsRunning {
+    margin-top: 55px;
+  }
+  .timeInput {
+    font-size: 42px;
+    width: 70px;
+    height: 60px;
+  }
+  .unitLabel {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  .stopwatchDesc {
+    font-size: 14px;
+  }
+  .timerDisplay {
+    font-size: 56px;
+  }
+  .timerLabel {
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+  .controlBtn {
+    padding: 12px 0;
+    font-size: 15px;
+  }
 }

@@ -69,7 +69,7 @@ export const en = {
     ]
   },
   popup: {
-    label: "Chrome Extension",
+    label: "Try Demo",
     titlePrefix: "Fastest & Simplest,",
     titleHighlight: "Start Focus in 1 Sec",
     description: "Stop wasting time on settings. The moment you turn on the timer via the intuitive popup, all digital noise distracting you disappears.",
