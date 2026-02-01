@@ -98,26 +98,43 @@
 
 .imageWrapper {
   position: relative;
+  width: calc(100% + 4rem); /* Counteract container padding */
+  margin: 0 -2rem;
   display: flex;
   justify-content: center;
   perspective: 1000px;
 }
 
-.mockup {
-  position: relative;
-  width: 100%;
-  max-width: 400px;
-  /* Visuals moved to browserWindow */
-  
-  /* The Tilt Effect */
-  transform: rotateY(-15deg) rotateX(5deg);
-  transition: transform 0.5s ease;
-  transform-style: preserve-3d;
+@media (min-width: 768px) {
+  .imageWrapper {
+    width: 100%;
+    margin: 0;
+  }
 }
 
-.mockup:hover {
-  transform: rotateY(0deg) rotateX(0deg) scale(1.02);
-  /* Hover shadow effect also moved/removed */
+.mockup {
+  position: relative;
+  width: 320px; /* Force fit content width on mobile */
+  max-width: none; /* Allow overflowing container padding for centering */
+  margin: 0; /* Remove auto margins so Flexbox parent can center even if overflowing */
+  
+  /* Mobile: Flat and slightly scaled to fit strict widths (like 360px phones) */
+  transform: scale(0.9);
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+  flex-shrink: 0; /* Prevent crushing on small screens */
+}
+
+@media (min-width: 768px) {
+  .mockup {
+    width: 100%;
+    max-width: 400px;
+    transform: rotateY(-15deg) rotateX(5deg);
+  }
+
+  .mockup:hover {
+    transform: rotateY(0deg) rotateX(0deg) scale(1.02);
+  }
 }
 
 .mockupImage {
@@ -165,6 +182,14 @@
   border-radius: 50%;
 }
 
+.divider {
+  width: 1px;
+  height: 24px;
+  background: #e5e7eb;
+  margin: 0 2px;
+  transition: all 0.3s ease;
+}
+
 .closeLight { background: #ef4444; }
 .minimizeLight { background: #f59e0b; }
 .maximizeLight { background: #10b981; }
@@ -183,9 +208,7 @@
   gap: 8px;
   border: 1px solid transparent;
 }
-.addressBar:hover {
-  background: #f0f2f5; /* Chrome-like hover */
-}
+
 
 .urlText {
   flex: 1;
@@ -206,6 +229,7 @@
   gap: 4px;
   align-items: center;
   color: #5f6368; /* Chrome icon color */
+  transition: gap 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .searchInput {
@@ -230,6 +254,35 @@
 }
 .iconButton:hover {
   background: rgba(0,0,0,0.06);
+}
+
+/* Dynamic Address Bar Helpers */
+.hiddenItem {
+  max-width: 0 !important;
+  width: auto !important; /* Allow shrinking */
+  min-width: 0 !important;
+  opacity: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.actionsCollapsed {
+  gap: 0 !important;
+}
+
+.mindlockIconWrapper, .iconButton, .profileAvatar, .divider {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mindlockIconWrapper, .iconButton {
+  max-width: 32px; /* Ensure start point for transition */
+}
+
+.profileAvatar {
+  max-width: 28px;
 }
 
 .mindlockIconWrapper {

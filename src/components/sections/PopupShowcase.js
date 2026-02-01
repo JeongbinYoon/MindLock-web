@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { CheckCircle2, Lock, Star, Puzzle, MoreVertical, Search, Youtube, Instagram, Facebook, History, ArrowLeft, XCircle } from 'lucide-react';
 import styles from './PopupShowcase.module.css';
 import { useLanguage } from '../providers/LanguageProvider';
@@ -18,6 +18,7 @@ export default function PopupShowcase() {
   const [centerInput, setCenterInput] = useState('');
   const [addressInput, setAddressInput] = useState('');
   const [isAddressBarFocused, setIsAddressBarFocused] = useState(false);
+  const inputRef = useRef(null);
 
   const handleSearch = (e) => {
      if (e.key === 'Enter') {
@@ -100,9 +101,13 @@ export default function PopupShowcase() {
                         <div className={`${styles.trafficLight} ${styles.maximizeLight}`} />
                      </div>
                      
-                     <div className={styles.addressBar}>
+                     <div 
+                        className={styles.addressBar}
+                        onClick={() => inputRef.current?.focus()}
+                     >
                         <Lock size={14} color="#6b7280" />
                         <input
+                           ref={inputRef}
                            type="text"
                            className={styles.urlText}
                            style={{
@@ -125,10 +130,10 @@ export default function PopupShowcase() {
                         <Star size={18} color="#6b7280" style={{fill: 'none', cursor:'pointer', flexShrink:0}} />
                      </div>
 
-                     <div className={styles.toolbarActions}>
+                     <div className={`${styles.toolbarActions} ${isAddressBarFocused ? styles.actionsCollapsed : ''}`}>
                         {/* MindLock Icon */}
                         <div 
-                           className={`${styles.mindlockIconWrapper} ${isPopupOpen ? styles.mindlockIconWrapperActive : ''}`} 
+                           className={`${styles.mindlockIconWrapper} ${isPopupOpen ? styles.mindlockIconWrapperActive : ''} ${isAddressBarFocused ? styles.hiddenItem : ''}`} 
                            title="MindLock"
                            onClick={() => setIsPopupOpen(!isPopupOpen)}
                            style={{cursor: 'pointer'}}
@@ -152,7 +157,7 @@ export default function PopupShowcase() {
                                  ON
                               </div>
                            )}
-                           {!isPopupOpen && (
+                           {!isPopupOpen && !isAddressBarFocused && (
                               <div className={styles.clickHint}>
                                  Click!
                               </div>
@@ -160,16 +165,16 @@ export default function PopupShowcase() {
                         </div>
                         
                         {/* Extensions Icon */}
-                        <div className={styles.iconButton} title="Extensions">
+                        <div className={`${styles.iconButton} ${isAddressBarFocused ? styles.hiddenItem : ''}`} title="Extensions">
                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5f6368" strokeWidth="1.5" xmlns="http://www.w3.org/2000/svg">
                              <path d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5C13 2.12 11.88 1 10.5 1S8 2.12 8 3.5V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7 1.49 0 2.7 1.21 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5c1.38 0 2.5-1.12 2.5-2.5S21.88 11 20.5 11z" />
                            </svg>
                         </div>
                         
-                        <div style={{width:'1px', height:'24px', background:'#e5e7eb', margin:'0 2px'}} />
+                        <div className={`${styles.divider} ${isAddressBarFocused ? styles.hiddenItem : ''}`} />
                         
                         {/* Profile & Menu */}
-                        <div className={styles.profileAvatar} title="Google Account">
+                        <div className={`${styles.profileAvatar} ${isAddressBarFocused ? styles.hiddenItem : ''}`} title="Google Account">
                            Y
                         </div>
                         <div className={styles.iconButton} title="Menu">
