@@ -26,18 +26,25 @@ export default function DistractionShield({ className }) {
     // Resize handler
     const resizeCanvas = () => {
       const parent = canvas.parentElement;
+      if (!parent) return;
+
       // Make canvas larger than the container to spawn particles from further away
-      // Multiplier 2.5 means particles will spawn well outside the logo area
       canvas.width = parent.clientWidth * 2.5;
       canvas.height = parent.clientHeight * 2.5;
 
       // Responsive Shield Radius
-      // Mobile (< 768px): radius 110 (slightly less close than 85, but closer than 180)
-      // Desktop: 180
       shieldRadius = window.innerWidth < 768 ? 110 : 180;
     };
 
-    window.addEventListener('resize', resizeCanvas);
+    const observer = new ResizeObserver(() => {
+        resizeCanvas();
+    });
+    
+    if (canvas.parentElement) {
+       observer.observe(canvas.parentElement);
+    }
+    
+    // Initial call just in case (though observer usually fires once)
     resizeCanvas();
 
     class Particle {
@@ -191,7 +198,7 @@ export default function DistractionShield({ className }) {
     draw();
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      observer.disconnect();
       cancelAnimationFrame(animationFrameId);
     };
   }, [theme]);
