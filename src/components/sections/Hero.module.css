@@ -199,9 +199,11 @@
   width: 100%;
   max-width: 500px;
   height: auto;
-  /* Pulsing brain-shaped border glow */
-  animation: brainPulse 2.5s ease-in-out infinite alternate;
-  will-change: filter;
+  /* Pulsing brain-shaped border glow + Shake effect (Synced) */
+  animation:
+    brainPulse 2.5s ease-in-out infinite alternate,
+    brainShake 2.5s linear infinite alternate;
+  will-change: filter, transform;
   transition: transform 0.3s ease;
 }
 
@@ -213,13 +215,41 @@
 
 @keyframes brainPulse {
   0% {
-    filter: drop-shadow(0 0 2px var(--glow-start-inner)) 
+    filter: drop-shadow(0 0 2px var(--glow-start-inner))
             drop-shadow(0 0 15px var(--glow-start-outer));
   }
   100% {
-    filter: drop-shadow(0 -1px 5px var(--glow-end-inner)) 
-            drop-shadow(0 0 30px var(--glow-end-outer));
+    filter: drop-shadow(0 -1px 10px var(--glow-end-inner))
+            drop-shadow(0 0 50px var(--glow-end-outer));
   }
+}
+
+@keyframes brainShake {
+  0%, 60% { transform: translate(0, 0); }
+  62% { transform: translate(-0.5px, 0.5px); }
+  64% { transform: translate(0.5px, -0.5px); }
+  66% { transform: translate(-0.5px, -0.5px); }
+  68% { transform: translate(0.5px, 0.5px); }
+  
+  70% { transform: translate(-0.5px, 0.5px); }
+  70.5% { transform: translate(0.5px, -0.5px); }
+  74% { transform: translate(-0.5px, -0.5px); }
+  76% { transform: translate(0.5px, 0.5px); }
+  
+  78% { transform: translate(-0.5px, 0.5px); }
+  80% { transform: translate(0.5px, -0.5px); }
+  80.5% { transform: translate(-0.5px, -0.5px); }
+  84% { transform: translate(0.5px, 0.5px); }
+  
+  86% { transform: translate(-0.5px, 0.5px); }
+  88% { transform: translate(0.5px, -0.5px); }
+  90% { transform: translate(-0.5px, -0.5px); }
+  90.5% { transform: translate(0.5px, 0.5px); }
+  
+  94% { transform: translate(-0.5px, 0.5px); }
+  96% { transform: translate(0.5px, -0.5px); }
+  98% { transform: translate(-0.5px, -0.5px); }
+  100% { transform: translate(0, 0); }
 }
 
 @media (min-width: 768px) {
