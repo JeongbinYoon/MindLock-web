@@ -121,7 +121,6 @@
   /* Mobile: Flat (no 3D) */
   transform: none;
   transition: transform 0.5s ease;
-  transform-style: preserve-3d;
   flex-shrink: 0;
 }
 
@@ -130,6 +129,9 @@
     width: 100%;
     max-width: 400px;
     transform: rotateY(-15deg) rotateX(5deg);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform;
   }
 
   .mockup:hover {
@@ -158,6 +160,12 @@
   box-shadow: 
     0 25px 50px -12px rgba(0, 0, 0, 0.2),
     0 0 30px rgba(99, 102, 241, 0.15);
+
+  /* Sharpen text during 3D transform */
+  transform: translateZ(0); 
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
 }
 
 .browserHeader {
