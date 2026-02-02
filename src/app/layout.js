@@ -83,6 +83,11 @@ export const metadata = {
   alternates: {
     canonical: 'https://mindlock.today',
   },
+  verification: {
+    other: {
+      'naver-site-verification': '08005d4d1549151e3a133dafbbcff30d2f214cea',
+    },
+  },
 };
 
 export default function RootLayout({ children }) {
