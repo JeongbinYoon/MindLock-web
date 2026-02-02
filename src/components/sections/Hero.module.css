@@ -225,31 +225,31 @@
 }
 
 @keyframes brainShake {
-  0%, 60% { transform: translate(0, 0); }
-  62% { transform: translate(-0.5px, 0.5px); }
-  64% { transform: translate(0.5px, -0.5px); }
-  66% { transform: translate(-0.5px, -0.5px); }
-  68% { transform: translate(0.5px, 0.5px); }
+  0%, 60% { transform: translate(0, 0) rotate(0deg); }
+  62% { transform: translate(-0.5px, 0.5px) rotate(-0.5deg); }
+  64% { transform: translate(0.5px, -0.5px) rotate(0.5deg); }
+  66% { transform: translate(-0.5px, -0.5px) rotate(-0.5deg); }
+  68% { transform: translate(0.5px, 0.5px) rotate(0.5deg); }
   
-  70% { transform: translate(-0.5px, 0.5px); }
-  70.5% { transform: translate(0.5px, -0.5px); }
-  74% { transform: translate(-0.5px, -0.5px); }
-  76% { transform: translate(0.5px, 0.5px); }
+  70% { transform: translate(-0.5px, 0.5px) rotate(-1deg); }
+  70.5% { transform: translate(0.5px, -0.5px) rotate(1deg); }
+  74% { transform: translate(-0.5px, -0.5px) rotate(-1deg); }
+  76% { transform: translate(0.5px, 0.5px) rotate(1deg); }
   
-  78% { transform: translate(-0.5px, 0.5px); }
-  80% { transform: translate(0.5px, -0.5px); }
-  80.5% { transform: translate(-0.5px, -0.5px); }
-  84% { transform: translate(0.5px, 0.5px); }
+  78% { transform: translate(-0.5px, 0.5px) rotate(-0.5deg); }
+  80% { transform: translate(0.5px, -0.5px) rotate(0.5deg); }
+  80.5% { transform: translate(-0.5px, -0.5px) rotate(-0.5deg); }
+  84% { transform: translate(0.5px, 0.5px) rotate(0.5deg); }
   
-  86% { transform: translate(-0.5px, 0.5px); }
-  88% { transform: translate(0.5px, -0.5px); }
-  90% { transform: translate(-0.5px, -0.5px); }
-  90.5% { transform: translate(0.5px, 0.5px); }
+  86% { transform: translate(-0.5px, 0.5px) rotate(-0.25deg); }
+  88% { transform: translate(0.5px, -0.5px) rotate(0.25deg); }
+  90% { transform: translate(-0.5px, -0.5px) rotate(-0.25deg); }
+  90.5% { transform: translate(0.5px, 0.5px) rotate(0.25deg); }
   
-  94% { transform: translate(-0.5px, 0.5px); }
-  96% { transform: translate(0.5px, -0.5px); }
-  98% { transform: translate(-0.5px, -0.5px); }
-  100% { transform: translate(0, 0); }
+  94% { transform: translate(-0.5px, 0.5px) rotate(0deg); }
+  96% { transform: translate(0.5px, -0.5px) rotate(0deg); }
+  98% { transform: translate(-0.5px, -0.5px) rotate(0deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
 }
 
 @media (min-width: 768px) {
