@@ -32,7 +32,7 @@ export default function PopupShowcase() {
   const handlePageNavigation = (page) => {
     setActivePage(page);
     // If navigating to a blocked site while active, log it
-    if (extStatus !== 'idle' && (page === 'youtube' || page === 'google' || page === 'tiktok')) {
+    if (extStatus !== 'idle' && (page === 'youtube' || page === 'google')) {
        const now = new Date();
        const timeId = Date.now();
        const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
@@ -292,8 +292,8 @@ export default function PopupShowcase() {
                            )}
 
                            {/* Unlocked Page Mock */}
-                           {((activePage !== 'newtab' && activePage === 'instagram') || 
-                             ((activePage === 'youtube' || activePage === 'google' || activePage === 'tiktok') && extStatus === 'idle')) && (
+                           {((activePage !== 'newtab' && (activePage === 'instagram' || activePage === 'tiktok')) || 
+                             ((activePage === 'youtube' || activePage === 'google') && extStatus === 'idle')) && (
                               <div style={{ textAlign: 'center' }}>
                                  {activePage === 'google' ? (
                                     <>
@@ -346,7 +346,7 @@ export default function PopupShowcase() {
                          </div>
                          
                          {/* Blocked Page Mock (YouTube/Google/TikTok) - MOVED OUTSIDE FOR FULL WIDTH */}
-                         {(activePage === 'youtube' || activePage === 'google' || activePage === 'tiktok') && extStatus !== 'idle' && (
+                         {(activePage === 'youtube' || activePage === 'google') && extStatus !== 'idle' && (
                             <div style={{ 
                                position: 'absolute', top: 0, left: 0,
                                width: '100%', height: '100%', background: '#111827', 
@@ -363,7 +363,7 @@ export default function PopupShowcase() {
                                <h2 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '8px' }}>{t.popup.browser.siteBlockedTitle}</h2>
                                <p 
                                   style={{ fontSize: '13px', color: '#9ca3af', marginBottom: '20px' }}
-                                  dangerouslySetInnerHTML={{ __html: t.popup.browser.siteBlockedDesc.replace('{site}', activePage === 'youtube' ? 'YouTube' : activePage === 'tiktok' ? 'TikTok' : 'Google') }}
+                                  dangerouslySetInnerHTML={{ __html: t.popup.browser.siteBlockedDesc.replace('{site}', activePage === 'youtube' ? 'YouTube' : 'Google') }}
                                />
                                <button onClick={(e) => { e.stopPropagation(); setActivePage('newtab'); }} className={styles.browserBackBtnBlocked}>
                                   {t.popup.browser.backButton}
