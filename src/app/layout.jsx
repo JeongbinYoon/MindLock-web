@@ -2,6 +2,7 @@ import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import ThemeProvider from "../components/providers/ThemeProvider";
 import { LanguageProvider } from "../components/providers/LanguageProvider";
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 import JsonLd from "../components/seo/JsonLd";
 
@@ -104,6 +105,7 @@ export default function RootLayout({ children }) {
             <Footer />
           </LanguageProvider>
         </ThemeProvider>
+        <GoogleAnalytics gaId="G-8XE1EXH4ZM" />
       </body>
     </html>
   );
