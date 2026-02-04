@@ -3,8 +3,8 @@
 import { useEffect, useRef } from 'react';
 import { useTheme } from 'next-themes';
 
-export default function DistractionShield({ className }) {
-  const canvasRef = useRef(null);
+export default function DistractionShield({ className }: { className?: string }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -12,8 +12,11 @@ export default function DistractionShield({ className }) {
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
-    let animationFrameId;
-    let particles = [];
+    if (!ctx) return; // Add null check for context
+
+    let animationFrameId: number;
+    let particles: Particle[] = []; // Typed correctly now
+
     
     // Shield configuration
     let shieldRadius = 180; // Radius around center where particles bounce
@@ -53,13 +56,24 @@ export default function DistractionShield({ className }) {
     resizeCanvas();
 
     class Particle {
+      x: number = 0;
+      y: number = 0;
+      targetX: number = 0;
+      targetY: number = 0;
+      vx: number = 0;
+      vy: number = 0;
+      size: number = 0;
+      color: string = '';
+      bounced: boolean = false;
+      life: number = 0;
+
       constructor() {
         this.reset(true);
       }
 
       reset(randomPos = false) {
-        const w = canvas.width;
-        const h = canvas.height;
+        const w = canvas!.width;
+        const h = canvas!.height;
         
         // Spawn at random edge of the LARGER canvas
         if (randomPos) {
@@ -103,8 +117,8 @@ export default function DistractionShield({ className }) {
       }
 
       update() {
-        const w = canvas.width;
-        const h = canvas.height;
+        const w = canvas!.width;
+        const h = canvas!.height;
         const centerX = w * CENTER_X_PCT;
         const centerY = h * CENTER_Y_PCT;
 
@@ -142,22 +156,22 @@ export default function DistractionShield({ className }) {
       }
 
       draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
+        ctx!.beginPath();
+        ctx!.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx!.fillStyle = this.color;
         
         if (this.bounced && this.life > 50) {
             // Flash color when bounced
              if (isLight) {
-               ctx.fillStyle = `rgba(79, 70, 229, ${this.life / 60})`; // Indigo flash
+               ctx!.fillStyle = `rgba(79, 70, 229, ${this.life / 60})`; // Indigo flash
              } else {
-               ctx.fillStyle = `rgba(255, 255, 255, ${this.life / 60})`;
+               ctx!.fillStyle = `rgba(255, 255, 255, ${this.life / 60})`;
              }
         }
         
-        ctx.globalAlpha = Math.min(1, this.life / 50); 
-        ctx.fill();
-        ctx.globalAlpha = 1;
+        ctx!.globalAlpha = Math.min(1, this.life / 50); 
+        ctx!.fill();
+        ctx!.globalAlpha = 1;
       }
     }
 
@@ -168,15 +182,15 @@ export default function DistractionShield({ className }) {
 
     // Animation Loop
     const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx!.clearRect(0, 0, canvas!.width, canvas!.height);
       
       // Draw Shield Glow (Very Diffuse)
-      const centerX = canvas.width * CENTER_X_PCT;
-      const centerY = canvas.height * CENTER_Y_PCT;
+      const centerX = canvas!.width * CENTER_X_PCT;
+      const centerY = canvas!.height * CENTER_Y_PCT;
       const time = Date.now() * 0.001;
       const pulse = 1 + Math.sin(time) * 0.05; 
       
-      const gradient = ctx.createRadialGradient(centerX, centerY, shieldRadius * 0.1, centerX, centerY, shieldRadius * 1.5 * pulse);
+      const gradient = ctx!.createRadialGradient(centerX, centerY, shieldRadius * 0.1, centerX, centerY, shieldRadius * 1.5 * pulse);
 
       if (isLight) {
         gradient.addColorStop(0, 'rgba(79, 70, 229, 0.1)'); // Indigo core
@@ -188,10 +202,10 @@ export default function DistractionShield({ className }) {
         gradient.addColorStop(1, 'rgba(79, 70, 229, 0.0)'); // Fade to transparent
       }
 
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, shieldRadius * 1.5 * pulse, 0, Math.PI * 2);
-      ctx.fillStyle = gradient;
-      ctx.fill();
+      ctx!.beginPath();
+      ctx!.arc(centerX, centerY, shieldRadius * 1.5 * pulse, 0, Math.PI * 2);
+      ctx!.fillStyle = gradient;
+      ctx!.fill();
       
       particles.forEach(p => {
         p.update();

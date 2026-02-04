@@ -1,4 +1,10 @@
-export default function PlaceholderImage({ text, height = '300px', className = '' }) {
+interface PlaceholderImageProps {
+  text?: string;
+  height?: string;
+  className?: string;
+}
+
+export default function PlaceholderImage({ text, height = '300px', className = '' }: PlaceholderImageProps) {
   return (
     <div 
       className={className}

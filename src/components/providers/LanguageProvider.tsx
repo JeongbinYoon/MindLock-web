@@ -4,9 +4,15 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { ko } from '../../locales/ko';
 import { en } from '../../locales/en';
 
-const LanguageContext = createContext();
+const LanguageContext = createContext<LanguageContextType | null>(null);
 
-export function LanguageProvider({ children }) {
+interface LanguageContextType {
+  language: string;
+  setLanguage: (lang: string) => void;
+  t: typeof ko;
+}
+
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
   // Default to 'ko' initially to match SSR/Server default if needed
   // But we want to check browser.
   // Ideally, state starts as null to avoid hydration mismatch if we render different text?
@@ -20,7 +26,7 @@ export function LanguageProvider({ children }) {
   useEffect(() => {
     // Check browser language
     // If it starts with 'ko', use 'ko', else 'en'
-    const browserLang = navigator.language || navigator.userLanguage; 
+    const browserLang = navigator.language || (navigator as any).userLanguage; 
     const isKorean = browserLang && browserLang.toLowerCase().startsWith('ko');
     
     setLanguage(isKorean ? 'ko' : 'en');
@@ -36,5 +42,7 @@ export function LanguageProvider({ children }) {
 }
 
 export function useLanguage() {
-  return useContext(LanguageContext);
+  const context = useContext(LanguageContext);
+  if (!context) throw new Error('useLanguage must be used within LanguageProvider');
+  return context;
 }

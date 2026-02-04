@@ -5,36 +5,40 @@ import { Play, Pause, Square } from 'lucide-react';
 import styles from './ExtensionMockup.module.css';
 import { useLanguage } from '../providers/LanguageProvider';
 
-export default function ExtensionMockup({ onStatusChange }) {
+interface ExtensionMockupProps {
+  onStatusChange?: (status: string) => void;
+}
+
+export default function ExtensionMockup({ onStatusChange }: ExtensionMockupProps) {
   const { t } = useLanguage();
   
   // States
-  const [activeTab, setActiveTab] = useState('timer'); // 'timer' | 'stopwatch'
+  const [activeTab, setActiveTab] = useState<'timer' | 'stopwatch'>('timer'); // 'timer' | 'stopwatch'
   const [hours, setHours] = useState('00');
   const [minutes, setMinutes] = useState('25');
   const [displayTime, setDisplayTime] = useState('');
   
   // Timer Logic States
   // status: 'idle' | 'running' | 'paused' | 'overtime'
-  const [status, setStatus] = useState('idle');
-  const [targetTime, setTargetTime] = useState(null);
-  const [startTime, setStartTime] = useState(null); // For stopwatch
-  const [pausedTime, setPausedTime] = useState(null); // For stopwatch/timer pause
+  const [status, setStatus] = useState<string>('idle');
+  const [targetTime, setTargetTime] = useState<number | null>(null);
+  const [startTime, setStartTime] = useState<number | null>(null); // For stopwatch
+  const [pausedTime, setPausedTime] = useState<number | null>(null); // For stopwatch/timer pause
   
   // UI States
   const [showGuiltModal, setShowGuiltModal] = useState(false);
   const [currentPauseMsgIndex, setCurrentPauseMsgIndex] = useState(-1);
   const [currentGuiltMsgIndex, setCurrentGuiltMsgIndex] = useState(-1);
   
-  const timerRef = useRef(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   // --- Helpers ---
-  const getRandomIndex = (length) => {
+  const getRandomIndex = (length: number) => {
     if (!length || length === 0) return -1;
     return Math.floor(Math.random() * length);
   };
 
-  const formatMs = (ms) => {
+  const formatMs = (ms: number) => {
     const totalSeconds = Math.floor(ms / 1000);
     const h = Math.floor(totalSeconds / 3600);
     const m = Math.floor((totalSeconds % 3600) / 60);
@@ -69,7 +73,7 @@ export default function ExtensionMockup({ onStatusChange }) {
       if (status === 'running') {
         if (activeTab === 'timer') {
           // Countdown
-          const diff = targetTime - now;
+          const diff = (targetTime || 0) - now;
           if (diff <= 0) {
             // Timer Finished -> Start Overtime
             setStatus('overtime');
@@ -79,11 +83,11 @@ export default function ExtensionMockup({ onStatusChange }) {
           setDisplayTime(formatMs(diff));
         } else {
           // Stopwatch
-          const diff = now - startTime;
+          const diff = now - (startTime || 0);
           setDisplayTime(formatMs(diff));
         }
       } else if (status === 'overtime') {
-        const diff = now - targetTime; // Counting up
+        const diff = now - (targetTime || 0); // Counting up
         setDisplayTime('+ ' + formatMs(diff));
       } else if (status === 'paused') {
         // Static display handled by render logic usually, but here we can just keep last display
@@ -93,9 +97,10 @@ export default function ExtensionMockup({ onStatusChange }) {
     };
 
     update(); // Initial call
+    update(); // Initial call
     timerRef.current = setInterval(update, 1000);
 
-    return () => clearInterval(timerRef.current);
+    return () => clearInterval(timerRef.current!);
   }, [status, targetTime, startTime, activeTab]);
 
   // --- Handlers ---
@@ -126,7 +131,7 @@ export default function ExtensionMockup({ onStatusChange }) {
       const idx = getRandomIndex(t.extension.pauseMessages?.length || 0);
       setCurrentPauseMsgIndex(idx);
 
-      clearInterval(timerRef.current);
+      if (timerRef.current) clearInterval(timerRef.current);
       // Store elapsed for resume
       // (Skipping complex resume logic for accurate demo, just visual pause is okay?)
       // Wait, "Stopwatch should work".
@@ -135,13 +140,13 @@ export default function ExtensionMockup({ onStatusChange }) {
       // Actually popup.js implements full pause logic.
       // Let's implement full pause for Stopwatch.
       if (activeTab === 'stopwatch') {
-         setPausedTime(Date.now() - startTime);
+         setPausedTime(Date.now() - (startTime || 0));
       }
     } else if (status === 'paused') {
       // Resume
       if (activeTab === 'stopwatch') {
         const now = Date.now();
-        setStartTime(now - pausedTime);
+        setStartTime(now - (pausedTime || 0));
         setStatus('running');
       }
     }

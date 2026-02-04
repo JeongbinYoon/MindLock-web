@@ -13,23 +13,23 @@ export default function PopupShowcase() {
   const [extStatus, setExtStatus] = useState('idle');
   const [activePage, setActivePage] = useState('newtab'); // 'newtab', 'google', 'youtube', 'instagram', 'facebook'
   const [isFlipped, setIsFlipped] = useState(false);
-  const [blockHistory, setBlockHistory] = useState([]);
+  const [blockHistory, setBlockHistory] = useState<{ id: number; site: string; time: string }[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [centerInput, setCenterInput] = useState('');
   const [addressInput, setAddressInput] = useState('');
   const [isAddressBarFocused, setIsAddressBarFocused] = useState(false);
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
      if (e.key === 'Enter') {
-        setSearchQuery(e.target.value);
+        setSearchQuery(e.currentTarget.value);
         setActivePage('google');
-        e.target.blur();
+        e.currentTarget.blur();
         setIsAddressBarFocused(false);
      }
   };
 
-  const handlePageNavigation = (page) => {
+  const handlePageNavigation = (page: string) => {
     setActivePage(page);
     // If navigating to a blocked site while active, log it
     if (extStatus !== 'idle' && (page === 'youtube' || page === 'google')) {
